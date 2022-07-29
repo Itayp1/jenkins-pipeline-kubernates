@@ -1,7 +1,18 @@
 #!/usr/bin/env groovy
 /* groovylint-disable LineLength */
 /* groovylint-disable-next-line CompileStatic */
-properties([
+
+pipeline {
+    agent any
+    environment {
+        GIT_REPO_TOKEN     = credentials('jenkinsRepo')
+        DOCKER_HUB_TOKEN = credentials('DOCKER_HUB_TOKEN')
+    }
+    stages {
+        stage('Setup parameters') {
+            steps {
+                script {
+                    properties([
                         parameters([
                             choice(
                                 name: 'RepositoryName',
@@ -178,13 +189,9 @@ properties([
 
                         ])
                     ])
-pipeline {
-    agent any
-    environment {
-        GIT_REPO_TOKEN     = credentials('jenkinsRepo')
-        DOCKER_HUB_TOKEN = credentials('DOCKER_HUB_TOKEN')
-    }
-    stages {
+                }
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building..'
