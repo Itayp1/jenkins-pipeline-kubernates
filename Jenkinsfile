@@ -84,6 +84,27 @@ pipeline {
                                                     sandbox: true,
                                                     script:
                                                             """
+                                                                import groovy.json.JsonSlurper
+                                                        try {
+
+                                                                def http = new URL('https://hub.docker.com/v2/repositories/itayp/${RepoName}/tags?page_size=100').openConnection() as HttpURLConnection
+                                                                http.setRequestMethod('GET')
+                                                                http.setDoOutput(true)
+                                                                http.setRequestProperty('Authorization', 'JWT ${DOCKER_HUB_TOKEN}')
+                                                                http.connect()
+                                                                def response = [:]
+                                                                if (http.responseCode == 200) {
+                                                                    response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
+                                                                } else {
+                                                                    response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
+                                                                }
+                                                            def resArr = []
+                                                            response.results.each { resArr.push(it.name) }
+                                                            // return resArr
+                                                            } catch (Exception e) {
+                                                            // return [e.toString()]
+                                                        }
+
                                     if(RepoName.equals('api-connect')) {
                                         inputBox="<input name='value' type='text' value='Intel Core i7'>"
                                     } else {
