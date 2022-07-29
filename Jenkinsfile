@@ -20,6 +20,7 @@ pipeline {
                                 name: 'Operation',
                                 choices: ['Build', 'Deploy']
                             ),
+        stringParam('versionn', 'my default stringParam value', 'my description'),
 
                                [$class: 'CascadeChoiceParameter',
                                 choiceType: 'PT_SINGLE_SELECT',
@@ -104,8 +105,9 @@ pipeline {
                                                             def resArr = []
                                                             response.results.each { resArr.push(it.name) }
                                                             // return resArr
-                                                            VERSION = resArr[0]
-                                                              inputBox='<input name="value" value=resArr[0] type="text">'
+
+                                                            versionn =resArr[0]
+                                                              inputBox='<input name="value" value=${versionn} type="text">'
 
                                                             } catch (Exception e) {
                                                         // return [e.toString()]
