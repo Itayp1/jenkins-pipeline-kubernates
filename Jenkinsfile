@@ -121,7 +121,7 @@ STRINGPARAMETER ="fffffffffffffffffffff"
                                     ]
                             ],
                             [$class: 'DynamicReferenceParameter',
-                                    choiceType: 'ET_FORMATTED_HTML',
+                                    choiceType: 'PT_SINGLE_SELECT',
                                     omitValueField: true,
                                     description: 'the last version of the image',
                                     name: 'NextImageVersion',
@@ -150,9 +150,9 @@ STRINGPARAMETER ="fffffffffffffffffffff"
 
                                                         }
 
-                                                               inputBox="<p>"+nextversion+"</p>"
+                                                          //     inputBox="<p>"+nextversion+"</p>"
 
-                                                        return inputBox
+                                                        return nextversion //inputBox
 
                                 '''
                                             ]
