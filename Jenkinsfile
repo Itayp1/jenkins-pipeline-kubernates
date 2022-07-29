@@ -104,7 +104,8 @@ pipeline {
                                             } else {
                                                 response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
                                             }
-    return "<input name='value' type='text' value='Intel Core i5'>" //[response.toString()]
+    // return "<input name='value' type='text' value='Intel Core i5'>" //[response.toString()]
+                                                inputBox="<input name='value' type='text' value='Intel Corssssssssssse i5'>"
 
                         }catch(Throwable t){
                             return [t.toString()]
@@ -115,11 +116,11 @@ pipeline {
                                             // } else {
                                             //     response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
                                             // }
-                                            if(NeedUpgradePC.equals('yes')) {
-                                                inputBox="<input name='value' type='text' value='Intel Core i5'>"
-                                            } else {
-                                                inputBox="<input name='value' type='text' value='Intel Core i5' disabled>"
-                                            }
+                                            // if(NeedUpgradePC.equals('yes')) {
+                                            //     inputBox="<input name='value' type='text' value='Intel Core i5'>"
+                                            // } else {
+                                            //     inputBox="<input name='value' type='text' value='Intel Core i5' disabled>"
+                                            // }
                                         """
                                                     ]
                                             ]
