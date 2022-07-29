@@ -129,7 +129,7 @@ pipeline {
                 cleanWs()
 
                 echo 'Building..'
-                sh 'git clone https://github.com/Itayp1/' + RepoName + '.git'
+                sh "git clone https://github.com/Itayp1/${RepoName}.git"
             }
         }
         stage('Test') {
