@@ -14,62 +14,7 @@ pipeline {
                 script {
                     properties([
                         parameters([
-                            choice(
-                                name: 'RepositoryName',
-                                choices: ['zoo-auto-battles', 'zoo-market', 'trading-alert']
-                            ),
-                             choice(
-                                name: 'Env',
-                                choices: ['Build', 'Deploy']
-                            ),
-                            // booleanParam(
-                            //     defaultValue: true,
-                            //     description: '',
-                            //     name: 'BOOLEAN'
-                            // ),
-                            // text(
-                            //     defaultValue: '''
-                            //     this is a multi-line
-                            //     string parameter example
-                            //     ''',
-                            //      name: 'MULTI-LINE-STRING'
-                            // ),
-                            // string(
-                            //     defaultValue: 'scriptcrunch',
-                            //     name: 'STRING-PARAMETER',
-                            //     trim: true
-                            // ),
-                            choice(name:'deploy_env', choices:['yes', 'no'], description: 'Do you need upgrade your PC'),
-                    [$class: 'DynamicReferenceParameter',
-                            choiceType: 'ET_FORMATTED_HTML',
-                            omitValueField: true,
-                            description: 'Please provide a Elastic alias label',
-                            name: 'PC_RAM',
-                            randomName: 'choice-parameter-5631314456178624',
-                            referencedParameters: 'NeedUpgradePC',
-                            script: [
-                                    $class: 'GroovyScript',
-                                    fallbackScript: [
-                                            classpath: [],
-                                            sandbox: true,
-                                            script:
-                                                    'return[\'nothing.....\']'
-                                    ],
-                                    script: [
-                                            classpath: [],
-                                            sandbox: true,
-                                            script:
-                                                    """
-                                    if(NeedUpgradePC.equals('yes')) {
-                                        inputBox="<input name='value' type='text' value='Kingston 8GB'>"
-                                    } else {
-                                        inputBox="<input name='value' type='text' value='Kingston 8GB' disabled>"
-                                    }
-                                """
-                                    ]
-                            ]
-                         ],
-          [$class: 'CascadeChoiceParameter',
+                               [$class: 'CascadeChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Select the Env Name from the Dropdown List',
             filterLength: 1,
@@ -113,32 +58,42 @@ pipeline {
                 ]
             ]
         ],
-          [$class: 'DynamicReferenceParameter',
-                                    choiceType: 'PT_SINGLE_SELECT',
-                                    omitValueField: true,
-                                    description: 'Please provide a Elastic alias label',
-                                    name: 'PC_RAM',
-                                    randomName: 'choice-parameter-5631314456178624',
-                                    referencedParameters: 'Env',
-                                    script: [
-                                            $class: 'GroovyScript',
-                                            fallbackScript: [
-                                                    classpath: [],
-                                                    sandbox: true,
-                                                    script:
-                                                            'return[\'nothing.....\']'
-                                            ],
-                                            script: [
-                                                    classpath: [],
-                                                    sandbox: true,
-                                                    script:
-                                                            '''
 
-                                            return ["dsf"]
-                                        '''
-                                            ]
+                             choice(
+                                name: 'Operation',
+                                choices: ['Build', 'Deploy']
+                            ),
+
+                    [$class: 'DynamicReferenceParameter',
+                            choiceType: 'ET_FORMATTED_HTML',
+                            omitValueField: true,
+                            description: 'Please provide a Elastic alias label',
+                            name: 'PC_RAM',
+                            randomName: 'choice-parameter-5631314456178624',
+                            referencedParameters: 'NeedUpgradePC',
+                            script: [
+                                    $class: 'GroovyScript',
+                                    fallbackScript: [
+                                            classpath: [],
+                                            sandbox: true,
+                                            script:
+                                                    'return[\'nothing.....\']'
+                                    ],
+                                    script: [
+                                            classpath: [],
+                                            sandbox: true,
+                                            script:
+                                                    """
+                                    if(NeedUpgradePC.equals('yes')) {
+                                        inputBox="<input name='value' type='text' value='Kingston 8GB'>"
+                                    } else {
+                                        inputBox="<input name='value' type='text' value='Kingston 8GB' disabled>"
+                                    }
+                                """
                                     ]
-                                ],
+                            ]
+                         ],
+
                   [$class: 'ChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Select the Env Name from the Dropdown List',
