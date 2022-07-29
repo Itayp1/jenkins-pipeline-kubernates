@@ -7,7 +7,7 @@ pipeline {
     environment {
         GIT_REPO_TOKEN     = credentials('jenkinsRepo')
         DOCKER_HUB_TOKEN = credentials('DOCKER_HUB_TOKEN')
-     }
+    }
     stages {
         stage('Setup parameters') {
             steps {
@@ -79,8 +79,6 @@ pipeline {
             filterable: true,
             name: 'RepoName',
             randomName: 'choice-parameter-5631314439613978',
-             referencedParameters: 'GIT_REPO_TOKEN',
-
             script: [
                 $class: 'GroovyScript',
                 fallbackScript: [
@@ -113,7 +111,7 @@ pipeline {
                 return resArr
                  } catch (Exception e) {
                 return [e.toString()]
-                }
+             }
                         """
                 ]
             ]
@@ -159,7 +157,7 @@ pipeline {
                 return resArr
                  } catch (Exception e) {
                 return [e.toString()]
-                }
+             }
                         """
                 ]
             ]
