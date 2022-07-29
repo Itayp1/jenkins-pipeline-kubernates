@@ -129,7 +129,7 @@ pipeline {
                 cleanWs()
 
                 echo 'Building..'
-                bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
+                bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/${RepoName}.git"
             }
         }
         stage('Test') {
