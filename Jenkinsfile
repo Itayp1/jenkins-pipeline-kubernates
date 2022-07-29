@@ -139,8 +139,16 @@ pipeline {
                                                     sandbox: true,
                                                     script:
                                                             '''
-                                                            def nextVer = ImageVersion+1
-                                                               inputBox="<p>"+nextVer+"</p>"
+
+                                                        def nextversion
+                                                        def isInteger= ImageVersion.toString().isInteger()
+                                                        if(isInteger){
+                                                        nextversion= Integer.parseInt(ImageVersion )+1
+                                                        }else{
+                                                        nextversion = 1
+                                                        }
+
+                                                               inputBox="<p>"+nextversion+"</p>"
 
                                                         return inputBox
 
