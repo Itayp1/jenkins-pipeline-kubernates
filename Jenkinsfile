@@ -89,7 +89,7 @@ pipeline {
                                                             script:
                                                                     """
 
-    //                     try{
+                        // try{
     //                 def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
     //                 http.setRequestMethod('GET')
     //                 http.setDoOutput(true)
@@ -107,20 +107,23 @@ pipeline {
     // // return "<input name='value' type='text' value='Intel Core i5'>" //[response.toString()]
     //                                             inputBox="<input name='value' type='text' value='Intel Corssssssssssse i5'>"
 
-    //                     }catch(Throwable t){
-    //                         return [t.toString()]
-    //                     }
+                        // }catch(Throwable t){
+                            // return [t.toString()]
+                        // }
 
     //                                         // if (http.responseCode == 200) {
     //                                         //     response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
     //                                         // } else {
     //                                         //     response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
     //                                         // }
-                                            if(NeedUpgradePC.equals('yes')) {
-                                                inputBox="<input name='value' type='text' value='Intel Core i5'>"
-                                            } else {
-                                                inputBox="<input name='value' type='text' value='Intel Core i5' disabled>"
-                                            }
+                                                def popo = "dddd"
+                                                    inputBox="<input name='value' type='text' value=popo>"
+
+                                            // if(NeedUpgradePC.equals('yes')) {
+                                                // inputBox="<input name='value' type='text' value='Intel Core i5'>"
+                                            // } else {
+                                                // inputBox="<input name='value' type='text' value='Intel Core i5' disabled>"
+                                            // }
                                         """
                                                     ]
                                             ]
