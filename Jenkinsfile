@@ -104,7 +104,7 @@ pipeline {
                                             } else {
                                                 response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
                                             }
-    return [response.toString()]
+    return "<input name='value' type='text' value='Intel Core i5'>" //[response.toString()]
 
                         }catch(Throwable t){
                             return [t.toString()]
