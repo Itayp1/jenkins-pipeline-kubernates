@@ -129,7 +129,7 @@ pipeline {
                 cleanWs()
 
                 echo 'Building..'
-                git credentialsId: '13f4dc4d-13c2-4811-bc5c-5f7ce2ca2152', url: 'https://github.com/Itayp1/zoo-market'
+                bat 'git clone https://itayp1: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@github.com/Itayp1/jenkins-pipeline-kubernates.git'
             }
         }
         stage('Test') {
