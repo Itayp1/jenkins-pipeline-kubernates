@@ -20,7 +20,7 @@ pipeline {
                                 name: 'Operation',
                                 choices: ['Build', 'Deploy']
                             ),
-                            string defaultValue: '1.0.0', name: 'versionn'
+                            string defaultValue: '1.0.0', name: 'versionn',
 
                                [$class: 'CascadeChoiceParameter',
                                 choiceType: 'PT_SINGLE_SELECT',
