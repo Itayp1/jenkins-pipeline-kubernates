@@ -19,52 +19,81 @@ pipeline {
                                 name: 'Operation',
                                 choices: ['Build', 'Deploy']
                             ),
+
                                [$class: 'CascadeChoiceParameter',
-            choiceType: 'PT_SINGLE_SELECT',
-            description: 'Select the Env Name from the Dropdown List',
-            filterLength: 1,
-            filterable: true,
-            name: 'RepoName',
-            randomName: 'choice-parameter-5631314439613978',
-            script: [
-                 $class: 'GroovyScript',
-                fallbackScript: [
-                    classpath: [],
-                    sandbox: true,
-                    script:"""
-                        return[\'Could not get Env\']
-                        """
-                ],
-                script: [
-                    classpath: [],
-                    sandbox: true,
-                    script:"""
-                    import groovy.json.JsonSlurper
-             try {
+                                choiceType: 'PT_SINGLE_SELECT',
+                                description: 'Select the Env Name from the Dropdown List',
+                                filterLength: 1,
+                                filterable: true,
+                                name: 'RepoName',
+                                randomName: 'choice-parameter-5631314439613978',
+                                script: [
+                                    $class: 'GroovyScript',
+                                    fallbackScript: [
+                                        classpath: [],
+                                        sandbox: true,
+                                        script:"""
+                                            return[\'Could not get Env\']
+                                            """
+                                    ],
+                                    script: [
+                                        classpath: [],
+                                        sandbox: true,
+                                        script:"""
+                                        import groovy.json.JsonSlurper
+                                     try {
 
-                    def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
-                    http.setRequestMethod('GET')
-                    http.setDoOutput(true)
-                     http.setRequestProperty('Authorization', 'token ${GIT_REPO_TOKEN}')
-                    http.connect()
-                    def response = [:]
-                    if (http.responseCode == 200) {
-                        response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
-                    } else {
-                        response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
-                    }
-                def resArr = []
-                response .each { resArr.push(it.name) }
-                return resArr
-                 } catch (Exception e) {
-                return [e.toString()]
-             }
-                        """
-                ]
-            ]
-        ]
-
-                        ])
+                                        def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
+                                        http.setRequestMethod('GET')
+                                        http.setDoOutput(true)
+                                        http.setRequestProperty('Authorization', 'token ${GIT_REPO_TOKEN}')
+                                        http.connect()
+                                        def response = [:]
+                                        if (http.responseCode == 200) {
+                                            response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
+                                        } else {
+                                            response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
+                                        }
+                                        def resArr = []
+                                        response .each { resArr.push(it.name) }
+                                        return resArr
+                                     } catch (Exception e) {
+                                          return [e.toString()]
+                                     }
+                                            """
+                                    ]
+                                ]
+                    ],
+                            [$class: 'DynamicReferenceParameter',
+                                    choiceType: 'ET_FORMATTED_HTML',
+                                    omitValueField: true,
+                                    description: 'Please provide a Elastic alias label',
+                                    name: 'PC_CPU',
+                                    randomName: 'choice-parameter-5631314456178624',
+                                    referencedParameters: 'RepoName',
+                                    script: [
+                                            $class: 'GroovyScript',
+                                            fallbackScript: [
+                                                    classpath: [],
+                                                    sandbox: true,
+                                                    script:
+                                                            'return[\'nothing.....\']'
+                                            ],
+                                            script: [
+                                                    classpath: [],
+                                                    sandbox: true,
+                                                    script:
+                                                            """
+                                    if(RepoName.equals('api-connect')) {
+                                        inputBox="<input name='value' type='text' value='Intel Core i5'>"
+                                    } else {
+                                        inputBox="<input name='value' type='text' value='Intel Core i5' disabled>"
+                                    }
+                                """
+                                            ]
+                                    ]
+                            ]
+                                    ])
                     ])
                 }
             }
