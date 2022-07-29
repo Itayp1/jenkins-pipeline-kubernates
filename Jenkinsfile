@@ -70,7 +70,7 @@ pipeline {
                                     ]
                                 ],
                                     [$class: 'DynamicReferenceParameter',
-                                            choiceType: 'ET_FORMATTED_HTML',
+                                            choiceType: 'FORMATTED_HIDDEN_HTML',
                                             omitValueField: true,
                                             description: 'Please provide a Elastic alias label',
                                             name: 'PC_CPU',
