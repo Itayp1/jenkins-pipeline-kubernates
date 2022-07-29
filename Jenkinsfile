@@ -80,13 +80,13 @@ pipeline {
                 $class: 'GroovyScript',
                 fallbackScript: [
                     classpath: [],
-                    sandbox: false,
+                    sandbox: true,
                     script:
                         'return[\'Could not get Env\']'
                 ],
                 script: [
                     classpath: [],
-                    sandbox: false,
+                    sandbox: true,
                     script:
                         'return["Dev","QA","Stage","Prod"]'
                 ]
