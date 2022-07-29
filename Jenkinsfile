@@ -4,7 +4,9 @@
 
 pipeline {
     agent any
-
+    environment {
+        Git_REPO_TOKEN     = credentials('jenkinsRepo')
+     }
     stages {
         stage('Setup parameters') {
             steps {
@@ -95,7 +97,7 @@ import groovy.json.JsonSlurper
                     def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
                     http.setRequestMethod('GET')
                     http.setDoOutput(true)
-                     http.setRequestProperty('Authorization', 'token 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')
+                     http.setRequestProperty('Authorization', 'token ${Git_REPO_TOKEN}')
                     http.connect()
                     def response = [:]
                     if (http.responseCode == 200) {
