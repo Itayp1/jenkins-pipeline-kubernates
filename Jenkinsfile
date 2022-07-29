@@ -36,9 +36,9 @@ pipeline {
                             //     name: 'STRING-PARAMETER',
                             //     trim: true
                             // ),
-                            choice(name:'NeedUpgradePC', choices:['yes', 'no'], description: 'Do you need upgrade your PC'),
+                            choice(name:'deploy_env', choices:['yes', 'no'], description: 'Do you need upgrade your PC'),
                             [$class: 'DynamicReferenceParameter',
-                                    choiceType: 'TEXT_BOX',
+                                    choiceType: 'FORMATTED_HTML',
                                     omitValueField: true,
                                     description: 'Please provide a Elastic alias label',
                                     name: 'PC_RAM',
@@ -58,10 +58,10 @@ pipeline {
                                                     script:
                                                             """
                                             if(Env.equals('Build')) {
-                                                return "dddddddddddd"
+                                                // return "dddddddddddd"
                                                 inputBox="<input name='value' type='text' value='Kingston 8GB'>"
                                             } else {
-                                                                                                return "dsdffsfddddddd"
+                                                                                                // return "dsdffsfddddddd"
 
                                                 inputBox="<input name='value' type='text' value='Kingston 8GB' disabled>"
                                             }
