@@ -103,7 +103,7 @@ pipeline {
                                                             def resArr = []
                                                             response.results.each { resArr.push(it.name) }
                                                             // return resArr
-                                                            VERSION = resArr[0]
+                                                            ${VERSION} = resArr[0]
                                                             } catch (Exception e) {
                                                         // return [e.toString()]
                                                         }
