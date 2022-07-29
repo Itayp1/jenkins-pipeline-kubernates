@@ -14,11 +14,11 @@ pipeline {
                 script {
                     properties([
 
-                             choice(
+                        parameters([
+                                            choice(
                                 name: 'Operation',
                                 choices: ['Build', 'Deploy']
                             ),
-                        parameters([
                                [$class: 'CascadeChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Select the Env Name from the Dropdown List',
