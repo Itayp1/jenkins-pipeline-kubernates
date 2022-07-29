@@ -149,7 +149,9 @@ pipeline {
                                                         }else{
                                                         nextversion = 1
                                                         NEXT_VERSION=1
+
                                                         }
+                                                                        STRINGPARAMETER=1234
 
                                                                inputBox="<p>"+nextversion+"</p>"
 
