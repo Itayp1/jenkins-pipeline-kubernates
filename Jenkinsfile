@@ -102,11 +102,12 @@ pipeline {
                                                             response.results.each { resArr.push(it.name) }
                                                             // return resArr
                                                             } catch (Exception e) {
-                                                            // return [e.toString()]
+                                                        // return [e.toString()]
                                                         }
 
                                     if(RepoName.equals('api-connect')) {
-                                           inputBox="<input name='value' type='text' value='resArr[0]'>"
+                                           inputBox='<input name="value" value="${env.BRANCH_NAME}" type="text">'
+
                                     } else {
                                         inputBox="<input name='value' type='text' value='Intel Core i5' disabled>"
                                     }
