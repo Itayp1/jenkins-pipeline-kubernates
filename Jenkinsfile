@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
 /* groovylint-disable-next-line CompileStatic */
+
 pipeline {
     agent any
 
@@ -90,18 +91,17 @@ pipeline {
 
                         try{
                     def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
+                    http.setRequestMethod('GET')
+                    http.setDoOutput(true)
+                    http.setRequestProperty('Accept', 'application/json')
+                    http.setRequestProperty('Authorization', 'token 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')
+                          http.outputStream.write(body.getBytes('UTF-8'))
+                    http.connect()
+
+                    def response = [:]
                         }catch(Throwable t){
                             return [t.toString()]
                         }
-
-                    // http.setRequestMethod('GET')
-                    // http.setDoOutput(true)
-                    // http.setRequestProperty('Accept', 'application/json')
-                    // http.setRequestProperty('Authorization', 'token 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')
-                    //       http.outputStream.write(body.getBytes('UTF-8'))
-                    // http.connect()
-
-                    // def response = [:]
 
                                             // if (http.responseCode == 200) {
                                             //     response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
