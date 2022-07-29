@@ -129,7 +129,7 @@ pipeline {
                 cleanWs()
 
                 echo 'Building..'
-                bat "git clone https://github.com/Itayp1/${RepoName}.git"
+                git credentialsId: '13f4dc4d-13c2-4811-bc5c-5f7ce2ca2152', url: 'https://github.com/Itayp1/zoo-market'
             }
         }
         stage('Test') {
