@@ -7,7 +7,7 @@ pipeline {
 
     parameters {
         booleanParam(name: 'BOOLEAN_PARAM', defaultValue: false, description: '')
-        choice(name:'RepositoryName', choices:['zoo-auto-battles','zoo-market' ,"trading-alert"], description: 'The Repository from the git artifact'),
+        choice(name:'RepositoryName', choices:['zoo-auto-battles', 'zoo-market', 'trading-alert'], description: 'The Repository from the git artifact')
 
         string(name: 'STATEMENT', defaultValue: 'hello; ls /', description: 'What should I say?')
     }
