@@ -5,6 +5,7 @@ pipeline {
 
     parameters {
         booleanParam(name: 'BOOLEAN_PARAM', defaultValue: false, description: '')
+        choice(name: 'SampleParam', choices: 'false\ntrue', description: 'This is a sample parameter.')
 
         string(name: 'STATEMENT', defaultValue: 'hello; ls /', description: 'What should I say?')
     }
