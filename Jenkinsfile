@@ -119,7 +119,6 @@ pipeline {
                                                 //                                         // }
                                                 def popo = "dddd"
                                                     inputBox="<input name='value' type='text' value=popo>"
-                                                    return
 
                                         // if(NeedUpgradePC.equals('yes')) {
                                         // inputBox="<input name='value' type='text' value='Intel Core i5'>"
