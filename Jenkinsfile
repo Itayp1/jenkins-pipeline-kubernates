@@ -39,15 +39,28 @@ pipeline {
                                 name: 'STRING-PARAMETER',
                                 trim: true
                             ),
-                            activeChoiceParam('CHOICE-1') {
-                                description('Allows user choose from multiple choices')
-                                filterable()
-                                choiceType('SINGLE_SELECT')
-                                groovyScript {
-                                    script('["choice1", "choice2"]')
-                                    fallbackScript('"fallback choice"')
-                                }
-                            }
+                                [$class: 'ChoiceParameter',
+                                    choiceType: 'PT_SINGLE_SELECT',
+                                    description: 'Select the Environemnt from the Dropdown List',
+                                    filterLength: 1,
+                                    filterable: false,
+                                    name: 'Env',
+                                    script: [
+                                        $class: 'GroovyScript',
+                                        fallbackScript: [
+                                            classpath: [],
+                                            sandbox: false,
+                                            script:
+                                                "return['Could not get The environemnts']"
+                                        ],
+                                        script: [
+                                            classpath: [],
+                                            sandbox: false,
+                                            script:
+                                                "return['dev','stage','prod']"
+                                        ]
+                                    ]
+                                ]
                         ])
                     ])
                 }
