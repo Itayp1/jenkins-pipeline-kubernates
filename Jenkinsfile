@@ -3,7 +3,7 @@
 
 properties([
     parameters([
-        [$class: 'ChoiceParameter',
+        [$class: 'activeChoiceParam',
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Select a choice',
             filterLength: 1,
@@ -31,7 +31,6 @@ pipeline {
         choice(name: 'SampleParam', choices: 'false\ntrue', description: 'This is a sample parameter.')
 
         string(name: 'STATEMENT', defaultValue: 'hello; ls /', description: 'What should I say?')
-
     }
 
     stages {
