@@ -58,8 +58,11 @@ pipeline {
                                                     script:
                                                             """
                                             if(Env.equals('Build')) {
+                                                return "dddddddddddd"
                                                 inputBox="<input name='value' type='text' value='Kingston 8GB'>"
                                             } else {
+                                                                                                return "dsdffsfddddddd"
+
                                                 inputBox="<input name='value' type='text' value='Kingston 8GB' disabled>"
                                             }
                                         """
