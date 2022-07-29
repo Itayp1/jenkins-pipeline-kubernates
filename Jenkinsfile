@@ -67,13 +67,7 @@ pipeline {
                                     referencedParameters: 'STATEMENT',
                                     script:
                                         [$class: 'GroovyScript',
-                                        script: 'return["Could not get AMi Information"]',
-                                        script: [
-                                            script: '''
-                                                        return["ami-sdf34sdf:  AMI with Java", "ami-sdf34ds: AMI with Python", "ami-sdf3sf3: AMI with Groovy"]
-
-                                                    '''
-                                                ]
+                                        script: 'return["Could not get AMi Information"]'
                                         ]
                                 ]
                         ])
