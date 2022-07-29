@@ -99,6 +99,13 @@ pipeline {
                     http.connect()
 
                     def response = [:]
+                                   if (http.responseCode == 200) {
+                                                response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
+                                            } else {
+                                                response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
+                                            }
+    return [response.toString()]
+
                         }catch(Throwable t){
                             return [t.toString()]
                         }
