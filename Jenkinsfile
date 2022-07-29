@@ -111,7 +111,7 @@ pipeline {
                                             ]
                                     ]
                                 ],
-                  [$class: 'DynamicReferenceParameter',
+                  [$class: 'ChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Select the Env Name from the Dropdown List',
             filterLength: 1,
