@@ -103,7 +103,7 @@ import groovy.json.JsonSlurper
                     } else {
                         response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
                     }
-def resArr = [response[0].name]
+def resArr = [response[0]]
 // response .each { resArr.push(it.name) }
 return resArr
                  } catch (Exception e) {
