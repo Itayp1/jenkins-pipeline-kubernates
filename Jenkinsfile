@@ -1,18 +1,7 @@
 #!/usr/bin/env groovy
 /* groovylint-disable LineLength */
 /* groovylint-disable-next-line CompileStatic */
-
-pipeline {
-    agent any
-    environment {
-        GIT_REPO_TOKEN     = credentials('jenkinsRepo')
-        DOCKER_HUB_TOKEN = credentials('DOCKER_HUB_TOKEN')
-    }
-    stages {
-        stage('Setup parameters') {
-            steps {
-                script {
-                    properties([
+properties([
                         parameters([
                             choice(
                                 name: 'RepositoryName',
@@ -40,7 +29,35 @@ pipeline {
                             //     trim: true
                             // ),
                             choice(name:'deploy_env', choices:['yes', 'no'], description: 'Do you need upgrade your PC'),
-
+                    [$class: 'DynamicReferenceParameter',
+                            choiceType: 'ET_FORMATTED_HTML',
+                            omitValueField: true,
+                            description: 'Please provide a Elastic alias label',
+                            name: 'PC_RAM',
+                            randomName: 'choice-parameter-5631314456178624',
+                            referencedParameters: 'NeedUpgradePC',
+                            script: [
+                                    $class: 'GroovyScript',
+                                    fallbackScript: [
+                                            classpath: [],
+                                            sandbox: true,
+                                            script:
+                                                    'return[\'nothing.....\']'
+                                    ],
+                                    script: [
+                                            classpath: [],
+                                            sandbox: true,
+                                            script:
+                                                    """
+                                    if(NeedUpgradePC.equals('yes')) {
+                                        inputBox="<input name='value' type='text' value='Kingston 8GB'>"
+                                    } else {
+                                        inputBox="<input name='value' type='text' value='Kingston 8GB' disabled>"
+                                    }
+                                """
+                                    ]
+                            ]
+                         ],
           [$class: 'CascadeChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Select the Env Name from the Dropdown List',
@@ -161,9 +178,13 @@ pipeline {
 
                         ])
                     ])
-                }
-            }
-        }
+pipeline {
+    agent any
+    environment {
+        GIT_REPO_TOKEN     = credentials('jenkinsRepo')
+        DOCKER_HUB_TOKEN = credentials('DOCKER_HUB_TOKEN')
+    }
+    stages {
         stage('Build') {
             steps {
                 echo 'Building..'
