@@ -106,7 +106,8 @@ pipeline {
                                                         }
 
                                     if(RepoName.equals('api-connect')) {
-                                        inputBox="<input name='value' type='text' value='resArr[0]'>"
+                                         return <p>${resArr[0]}</p>
+                                        // inputBox="<input name='value' type='text' value='resArr[0]'>"
                                     } else {
                                         inputBox="<input name='value' type='text' value='Intel Core i5' disabled>"
                                     }
