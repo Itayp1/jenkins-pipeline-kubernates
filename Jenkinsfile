@@ -38,7 +38,7 @@ pipeline {
                                 trim: true
                             ),
                                 [$class: 'ChoiceParameter',
-                                    choiceType: 'PT_SINGLE_SELECT',
+                                    choiceType: 'ET_FORMATTED_HTML',
                                     description: 'Select the Environemnt from the Dropdown List',
                                     // filterLength: 1,
                                     filterable: false,
