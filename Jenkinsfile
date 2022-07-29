@@ -172,6 +172,7 @@ pipeline {
                 bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/${RepoName}.git"
                 bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
                 echo "params:${params}"
+                echo "env:${env}"
 
                 bat """
 
