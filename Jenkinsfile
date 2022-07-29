@@ -109,7 +109,7 @@ pipeline {
                                                             // return resArr
 
                                                             STRINGPARAMETER =resArr[0]
-                                                              inputBox='<p>'+resArr[0]+'</p>'
+                                                              inputBox='<p>'+response.results[0]+'</p>'
 
                                                             } catch (Exception e) {
                                                         // return [e.toString()]
