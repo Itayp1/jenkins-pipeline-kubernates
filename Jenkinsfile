@@ -88,7 +88,7 @@ pipeline {
                                                     classpath: [],
                                                     sandbox: true,
                                                     script:
-                                                            '''
+                                                            """
                                                                 import groovy.json.JsonSlurper
 
                                                         try {
@@ -115,7 +115,7 @@ pipeline {
                                                         }
                                                         return inputBox
 
-                                '''
+                                """
                                             ]
                                     ]
                             ]
