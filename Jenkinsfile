@@ -110,6 +110,7 @@ pipeline {
                                                             } catch (Exception e) {
                                                         // return [e.toString()]
                                                         }
+                                                        return inputBox
 
                                 """
                                             ]
