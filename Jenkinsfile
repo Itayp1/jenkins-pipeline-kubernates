@@ -91,7 +91,7 @@ STRINGPARAMETER ="fffffffffffffffffffff"
                                         script:"""
                                         import groovy.json.JsonSlurper
                                      try {
- 
+
                                         def http = new URL('https://api.github.com/user/repos?visibility=all&per_page=222').openConnection() as HttpURLConnection
                                         http.setRequestMethod('GET')
                                         http.setDoOutput(true)
@@ -104,8 +104,7 @@ STRINGPARAMETER ="fffffffffffffffffffff"
                                             response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
                                         }
                                         def resArr = []
-                                        response .each { resArr.push(it.name) }
-
+                                        response.each { resArr.push(it.name) }
 
                                           def nextversion
                                         def isInteger= ImageVersion.toString().isInteger()
@@ -114,12 +113,10 @@ STRINGPARAMETER ="fffffffffffffffffffff"
                                         }else{
                                         nextversion = 1
 
-
-
                                         return [nextversion]
                                      } catch (Exception e) {
                                           return [e.toString()]
-                                     }
+                                        }
                                             """
                                     ]
                                 ]
@@ -215,9 +212,9 @@ STRINGPARAMETER ="fffffffffffffffffffff"
 
                                     ])
                     ])
+                                     }
                 }
             }
-        }
         stage('Build') {
             steps {
                 cleanWs()
@@ -246,5 +243,5 @@ STRINGPARAMETER ="fffffffffffffffffffff"
                 echo 'Deploying....'
             }
         }
+        }
     }
-}
