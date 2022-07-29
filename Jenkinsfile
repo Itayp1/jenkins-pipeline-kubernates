@@ -13,6 +13,11 @@ pipeline {
             steps {
                 script {
                     properties([
+
+                             choice(
+                                name: 'Operation',
+                                choices: ['Build', 'Deploy']
+                            ),
                         parameters([
                                [$class: 'CascadeChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
@@ -57,12 +62,7 @@ pipeline {
                         """
                 ]
             ]
-        ],
-
-                             choice(
-                                name: 'Operation',
-                                choices: ['Build', 'Deploy']
-                            )
+        ]
 
                         ])
                     ])
