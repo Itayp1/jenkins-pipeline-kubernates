@@ -75,7 +75,7 @@ pipeline {
                                     description: 'Please provide a Elastic alias label',
                                     name: 'PC_CPU',
                                     randomName: 'choice-parameter-5631314456178624',
-                                    referencedParameters: 'RepoName',
+                                    referencedParameters: 'RepoName, STRINGPARAMETER',
                                     script: [
                                             $class: 'GroovyScript',
                                             fallbackScript: [
