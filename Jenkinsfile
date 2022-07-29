@@ -93,6 +93,16 @@ pipeline {
                     http.setDoOutput(true)
                     http.setRequestProperty('Accept', 'application/json')
                     http.setRequestProperty('Authorization', 'token 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')
+                          http.outputStream.write(body.getBytes('UTF-8'))
+                    http.connect()
+
+                    def response = [:]
+
+                    if (http.responseCode == 200) {
+                        response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
+                    } else {
+                        response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
+                    }
                                             if(NeedUpgradePC.equals('yes')) {
                                                 inputBox="<input name='value' type='text' value='Intel Core i5'>"
                                             } else {
