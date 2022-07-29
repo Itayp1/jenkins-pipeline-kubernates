@@ -110,7 +110,7 @@ pipeline {
                                                             // return resArr
 
                                                             STRINGPARAMETER =resArr[0]
-                                                              inputBox='<input name="value" value=${STRINGPARAMETER} type="text">'
+                                                              inputBox='<input name="value" value=${env.STRINGPARAMETER} type="text">'
 
                                                             } catch (Exception e) {
                                                         // return [e.toString()]
