@@ -89,7 +89,6 @@ pipeline {
                                                                     """
 
                         try{
-                                             import groovy.json.JsonSlurper
                     def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
                         }catch(Throwable t){
                             return [t.toString()]
