@@ -7,7 +7,7 @@ pipeline {
     environment {
         GIT_REPO_TOKEN     = credentials('jenkinsRepo')
         DOCKER_HUB_TOKEN = credentials('DOCKER_HUB_TOKEN')
-        VERSION = 1
+        NEXT_VERSION = ''
     }
     stages {
         stage('Setup parameters') {
@@ -144,8 +144,10 @@ pipeline {
                                                         def isInteger= ImageVersion.toString().isInteger()
                                                         if(isInteger){
                                                         nextversion= Integer.parseInt(ImageVersion )+1
+                                                        NEXT_VERSION = nextversion
                                                         }else{
                                                         nextversion = 1
+                                                        NEXT_VERSION=1
                                                         }
 
                                                                inputBox="<p>"+nextversion+"</p>"
