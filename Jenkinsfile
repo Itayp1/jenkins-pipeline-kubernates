@@ -43,7 +43,7 @@ pipeline {
                                 [$class: 'ChoiceParameter',
                                     choiceType: 'PT_SINGLE_SELECT',
                                     description: 'Select the Environemnt from the Dropdown List',
-                                    filterLength: 1,
+                                    // filterLength: 1,
                                     filterable: false,
                                     name: 'Env',
                                     script: [
