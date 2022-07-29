@@ -95,7 +95,7 @@ import groovy.json.JsonSlurper
                     def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
                     http.setRequestMethod('GET')
                     http.setDoOutput(true)
-                     http.setRequestProperty('Authorization', 'token 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  ')
+                     http.setRequestProperty('Authorization', 'token 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')
                     http.connect()
                     def response = [:]
                     if (http.responseCode == 200) {
