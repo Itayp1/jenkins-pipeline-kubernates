@@ -5,6 +5,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                ssh 'ifconfig'
                 echo 'Building..'
             }
         }
