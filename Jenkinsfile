@@ -87,12 +87,12 @@ pipeline {
                                                             sandbox: true,
                                                             script:
                                                                     """
-                        try {
+
+                        try{
                                              import groovy.json.JsonSlurper
                     def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
-                       } catch (Exception e) {
-                 inputBox="<input name='value' type='text' value='sssssssss' disabled>"
-                 return
+                        }catch(Throwable t){
+                            return [t.toString()]
                         }
 
                     // http.setRequestMethod('GET')
