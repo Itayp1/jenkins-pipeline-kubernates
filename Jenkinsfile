@@ -2,36 +2,6 @@
 /* groovylint-disable-next-line CompileStatic */
 
 /* groovylint-disable-next-line CompileStatic */
-
-properties([
-                            parameters([
-                                [$class: 'ChoiceParameter',
-                                    choiceType: 'PT_SINGLE_SELECT',
-                                    description: 'Select the Environemnt from the Dropdown List',
-                                    filterLength: 1,
-                                    filterable: false,
-                                    name: 'Env',
-                                    script: [
-                                        $class: 'GroovyScript',
-                                        fallbackScript: [
-                                            classpath: [],
-                                            sandbox: false,
-                                            script:
-                                                "return['Could not get The environemnts']"
-                                        ],
-                                        script: [
-                                            classpath: [],
-                                            sandbox: false,
-                                            script:
-                                                "return['dev','stage','prod']"
-                                        ]
-                                    ]
-                                ]
-                                        ]
-                                ]
-                            ])
-                        ])
-
 pipeline {
     agent any
 
@@ -43,6 +13,37 @@ pipeline {
     }
 
     stages {
+        stage('Setup parameters') {
+            steps {
+                script {
+                    properties([
+                        parameters([
+                            choice(
+                                choices: ['ONE', 'TWO'],
+                                name: 'PARAMETER_01'
+                            ),
+                            booleanParam(
+                                defaultValue: true,
+                                description: '',
+                                name: 'BOOLEAN'
+                            ),
+                            text(
+                                defaultValue: '''
+                                this is a multi-line
+                                string parameter example
+                                ''',
+                                 name: 'MULTI-LINE-STRING'
+                            ),
+                            string(
+                                defaultValue: 'scriptcrunch',
+                                name: 'STRING-PARAMETER',
+                                trim: true
+                            )
+                        ])
+                    ])
+                }
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building..'
