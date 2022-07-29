@@ -20,8 +20,11 @@ pipeline {
                                 name: 'Operation',
                                 choices: ['Build', 'Deploy']
                             ),
-                            string defaultValue: '1.0.0', name: 'versionn',
-
+               string(
+                                defaultValue: 'scriptcrunch',
+                                name: 'STRING-PARAMETER',
+                                trim: true
+                            ),
                                [$class: 'CascadeChoiceParameter',
                                 choiceType: 'PT_SINGLE_SELECT',
                                 description: 'Select the Env Name from the Dropdown List',
