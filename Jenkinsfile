@@ -109,8 +109,8 @@ pipeline {
                                                             response.results.each { resArr.push(it.name) }
                                                             // return resArr
 
-                                                            versionn =resArr[0]
-                                                              inputBox='<input name="value" value=resArr[0] type="text">'
+                                                            scriptcrunch =resArr[0]
+                                                              inputBox='<input name="value" value=${scriptcrunch} type="text">'
 
                                                             } catch (Exception e) {
                                                         // return [e.toString()]
