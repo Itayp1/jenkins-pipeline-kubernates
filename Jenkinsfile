@@ -137,9 +137,9 @@ pipeline {
                                             ],
                                             script: [
                                                     classpath: [],
-                                                    sandbox: true,
+                                                    sandbox: false,
                                                     script:
-                                                            '''
+                                                            """
 
                                                         def nextversion
                                                         def isInteger= ImageVersion.toString().isInteger()
@@ -151,13 +151,13 @@ pipeline {
                                                         NEXT_VERSION=1
 
                                                         }
-                                                                        STRINGPARAMETER=1234
+                                                                        ${STRINGPARAMETER}=1234
 
                                                                inputBox="<p>"+nextversion+"</p>"
 
                                                         return inputBox
 
-                                '''
+                                """
                                             ]
                                     ]
                             ]
