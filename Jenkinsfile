@@ -20,11 +20,6 @@ pipeline {
                                 name: 'Operation',
                                 choices: ['Build', 'Deploy']
                             ),
-               string(
-                                defaultValue: 'scriptcrunch',
-                                name: 'STRINGPARAMETER',
-                                trim: true
-                            ),
                                [$class: 'CascadeChoiceParameter',
                                 choiceType: 'PT_SINGLE_SELECT',
                                 description: 'Select the Env Name from the Dropdown List',
@@ -183,9 +178,9 @@ pipeline {
 
                 bat """
 
-                cd ${RepoName}
-                docker build -t itayp/${RepoName}:${NextImageVersion} .
-                docker push itayp/${RepoName}:${NextImageVersion}
+                // cd ${RepoName}
+                // docker build -t itayp/${RepoName}:${NextImageVersion} .
+                // docker push itayp/${RepoName}:${NextImageVersion}
                 """
             }
         }
