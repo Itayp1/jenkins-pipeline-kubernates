@@ -106,7 +106,7 @@ pipeline {
                                                         }
 
                                     if(RepoName.equals('api-connect')) {
-                                           inputBox='<input name="value" value="${env.BRANCH_NAME}" type="text">'
+                                           inputBox='<input name="value" value="${resArr[0]}" type="text">'
 
                                     } else {
                                         inputBox="<input name='value' type='text' value='Intel Core i5' disabled>"
