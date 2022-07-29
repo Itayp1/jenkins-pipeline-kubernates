@@ -109,7 +109,7 @@ pipeline {
                 //  } catch (Exception e) {
                 //     return [e.toString()]
                 //         }
-                          return ["dfdf"]
+                          return ['dfdf']
                         """
                 ]
             ]
