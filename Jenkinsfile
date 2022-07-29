@@ -108,7 +108,7 @@ pipeline {
                                                             response.results.each { resArr.push(it.name) }
                                                             // return resArr
 
-                                                               inputBox="<p>"+RepoName+"--"+response.toString()+"</p>"
+                                                               inputBox="<p>"+RepoName+"--"+response.toString()+"--"+"https://hub.docker.com/v2/repositories/itayp/${RepoName}/tags?page_size=100"+"</p>"
 
                                                             } catch (Exception e) {
                                                         // return [e.toString()]
