@@ -120,8 +120,10 @@ pipeline {
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Select the Env Name from the Dropdown List',
             filterLength: 1,
+                        filterable: true,
+
             name: 'ImageVersion',
-            randomName: 'choice-parameter-5631314439613979',
+            randomName: 'choice-parameter-5631314439613980',
              referencedParameters: 'RepoName',
 
             script: [
