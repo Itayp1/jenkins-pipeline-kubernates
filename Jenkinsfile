@@ -88,6 +88,7 @@ pipeline {
                                                             script:
                                                                     """
                                              import groovy.json.JsonSlurper
+                    def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
 
                                             if(NeedUpgradePC.equals('yes')) {
                                                 inputBox="<input name='value' type='text' value='Intel Core i5'>"
