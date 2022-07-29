@@ -47,7 +47,7 @@ pipeline {
                                         script:"""
                                         import groovy.json.JsonSlurper
                                      try {
-
+STRINGPARAMETER ="fffffffffffffffffffff"
                                         def http = new URL('https://api.github.com/user/repos?visibility=all&per_page=222').openConnection() as HttpURLConnection
                                         http.setRequestMethod('GET')
                                         http.setDoOutput(true)
