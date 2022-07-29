@@ -5,12 +5,6 @@
 pipeline {
     agent any
 
-    parameters {
-        booleanParam(name: 'BOOLEAN_PARAM', defaultValue: false, description: '')
-
-        string(name: 'STATEMENT', defaultValue: 'hello; ls /', description: 'What should I say?')
-    }
-
     stages {
         stage('Setup parameters') {
             steps {
@@ -18,34 +12,38 @@ pipeline {
                     properties([
                         parameters([
                             choice(
-                                choices: ['zoo-auto-battles', 'zoo-market', 'trading-alert'],
-                                name: 'RepositoryName'
+                                name: 'RepositoryName',
+                                choices: ['zoo-auto-battles', 'zoo-market', 'trading-alert']
                             ),
-                            booleanParam(
-                                defaultValue: true,
-                                description: '',
-                                name: 'BOOLEAN'
+                             choice(
+                                name: 'Env',
+                                choices: ['Build', 'Deploy']
                             ),
-                            text(
-                                defaultValue: '''
-                                this is a multi-line
-                                string parameter example
-                                ''',
-                                 name: 'MULTI-LINE-STRING'
-                            ),
-                            string(
-                                defaultValue: 'scriptcrunch',
-                                name: 'STRING-PARAMETER',
-                                trim: true
-                            ),
+                            // booleanParam(
+                            //     defaultValue: true,
+                            //     description: '',
+                            //     name: 'BOOLEAN'
+                            // ),
+                            // text(
+                            //     defaultValue: '''
+                            //     this is a multi-line
+                            //     string parameter example
+                            //     ''',
+                            //      name: 'MULTI-LINE-STRING'
+                            // ),
+                            // string(
+                            //     defaultValue: 'scriptcrunch',
+                            //     name: 'STRING-PARAMETER',
+                            //     trim: true
+                            // ),
                             choice(name:'NeedUpgradePC', choices:['yes', 'no'], description: 'Do you need upgrade your PC'),
                             [$class: 'DynamicReferenceParameter',
-                                    choiceType: 'ET_FORMATTED_HTML',
+                                    choiceType: 'TEXT_BOX',
                                     omitValueField: true,
                                     description: 'Please provide a Elastic alias label',
                                     name: 'PC_RAM',
                                     randomName: 'choice-parameter-5631314456178624',
-                                    referencedParameters: 'NeedUpgradePC',
+                                    referencedParameters: 'Env',
                                     script: [
                                             $class: 'GroovyScript',
                                             fallbackScript: [
@@ -59,7 +57,7 @@ pipeline {
                                                     sandbox: true,
                                                     script:
                                                             """
-                                            if(NeedUpgradePC.equals('yes')) {
+                                            if(Env.equals('Build')) {
                                                 inputBox="<input name='value' type='text' value='Kingston 8GB'>"
                                             } else {
                                                 inputBox="<input name='value' type='text' value='Kingston 8GB' disabled>"
