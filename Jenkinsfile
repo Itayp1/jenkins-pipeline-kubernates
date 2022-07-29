@@ -7,7 +7,11 @@ pipeline {
 
     parameters {
         booleanParam(name: 'BOOLEAN_PARAM', defaultValue: false, description: '')
-        choice(name: 'SampleParam', choices: 'false\ntrue', description: 'This is a sample parameter.')
+        choice(name:'RepositoryName', choices:[
+            'zoo-auto-battles',
+             'zoo-market' ,
+             "trading-alert"
+            ], description: 'The Repository from the git artifact'),
 
         string(name: 'STATEMENT', defaultValue: 'hello; ls /', description: 'What should I say?')
     }
@@ -99,18 +103,18 @@ pipeline {
     //                       http.outputStream.write(body.getBytes('UTF-8'))
     //                 http.connect()
 
-    //                 def response = [:]
-    //                                if (http.responseCode == 200) {
-    //                                             response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
-    //                                         } else {
-    //                                             response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
-    //                                         }
-    // // return "<input name='value' type='text' value='Intel Core i5'>" //[response.toString()]
-    //                                             inputBox="<input name='value' type='text' value='Intel Corssssssssssse i5'>"
+                           //                 def response = [:]
+                           //                                if (http.responseCode == 200) {
+                           //                                             response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
+                           //                                         } else {
+                           //                                             response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
+                           //                                         }
+                           // // return "<input name='value' type='text' value='Intel Core i5'>" //[response.toString()]
+                           //                                             inputBox="<input name='value' type='text' value='Intel Corssssssssssse i5'>"
                            inputBox="<input name='value' type='text' value="dddd">"
 
                         }catch(Throwable t){
-                            ppp = "t.toString()"
+                            ppp = t.toString()
                             inputBox="<input name='value' type='text' value=ppp>"
 
                         }
