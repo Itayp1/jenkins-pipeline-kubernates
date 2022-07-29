@@ -126,7 +126,10 @@ pipeline {
         }
         stage('Build') {
             steps {
+                cleanWs()
+
                 echo 'Building..'
+                sh 'git clone https://github.com/Itayp1/zoo-auto-battles.git'
             }
         }
         stage('Test') {
