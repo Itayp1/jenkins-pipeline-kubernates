@@ -106,6 +106,7 @@ pipeline {
     //                                         }
     // // return "<input name='value' type='text' value='Intel Core i5'>" //[response.toString()]
     //                                             inputBox="<input name='value' type='text' value='Intel Corssssssssssse i5'>"
+                           inputBox="<input name='value' type='text' value="dddd">"
 
                         }catch(Throwable t){
                            inputBox="<input name='value' type='text' value=t.toString()>"
