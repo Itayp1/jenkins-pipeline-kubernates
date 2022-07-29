@@ -69,6 +69,7 @@ pipeline {
                                     // filterLength: 1,
                                     filterable: false,
                                     name: 'Env2',
+                                    /* groovylint-disable-next-line DuplicateMapLiteral */
                                     script: [
                                         $class: 'GroovyScript',
                                         fallbackScript: [

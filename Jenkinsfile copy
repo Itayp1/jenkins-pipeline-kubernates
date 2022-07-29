@@ -61,6 +61,7 @@ pipeline {
                                             """
                try {
                     def body = '{"id": 120}'
+                    /* groovylint-disable-next-line LineLength */
                     def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
                     http.setRequestMethod('GET')
                     http.setDoOutput(true)
