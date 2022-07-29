@@ -4,7 +4,7 @@ pipeline {
     agent any
 
     parameters {
-        booleanParam('RUN_TESTS', true, 'uncheck to disable tests')
+        booleanParam(name: 'BOOLEAN_PARAM', defaultValue: false, description: '')
 
         string(name: 'STATEMENT', defaultValue: 'hello; ls /', description: 'What should I say?')
     }
