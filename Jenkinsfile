@@ -38,7 +38,7 @@ pipeline {
                             // ),
                             choice(name:'deploy_env', choices:['yes', 'no'], description: 'Do you need upgrade your PC'),
                             [$class: 'DynamicReferenceParameter',
-                                    choiceType: 'FORMATTED_HTML',
+                                    choiceType: 'ET_FORMATTED_HTML',
                                     omitValueField: true,
                                     description: 'Please provide a Elastic alias label',
                                     name: 'PC_RAM',
