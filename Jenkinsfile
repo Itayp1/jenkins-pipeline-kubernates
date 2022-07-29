@@ -179,7 +179,7 @@ pipeline {
                                         classpath: [],
                                         sandbox: true,
                                         script:'''
-                                     return ["NextImageVersion]
+                                     return [NextImageVersion]
                                             '''
                                     ]
                                 ]
