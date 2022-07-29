@@ -88,7 +88,7 @@ pipeline {
                                                     classpath: [],
                                                     sandbox: true,
                                                     script:
-                                                            """
+                                                            '''
                                                                 import groovy.json.JsonSlurper
 
                                                         try {
@@ -108,14 +108,14 @@ pipeline {
                                                             response.results.each { resArr.push(it.name) }
                                                             // return resArr
 
-                                                               inputBox='<p>'+response.results[0].name+'</p>'
+                                                               inputBox="<p>"+"response.results[0].name"+"</p>"
 
                                                             } catch (Exception e) {
                                                         // return [e.toString()]
                                                         }
                                                         return inputBox
 
-                                """
+                                '''
                                             ]
                                     ]
                             ]
