@@ -70,7 +70,7 @@ pipeline {
                                     ]
                                 ],
                                     [$class: 'DynamicReferenceParameter',
-                                            choiceType: 'MULTI_SELECT',
+                                            choiceType: 'SINGLE_SELECT',
                                             omitValueField: true,
                                             description: 'Please provide a Elastic alias label',
                                             name: 'PC_CPU',
@@ -90,7 +90,7 @@ pipeline {
                                                             script:
                                                                     '''
 
-   return ["ddd" ,"dsfds"]
+   return ["ddd"]
                                         '''
                                                     ]
                                             ]
