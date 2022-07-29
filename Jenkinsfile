@@ -69,7 +69,61 @@ STRINGPARAMETER ="fffffffffffffffffffff"
                                     ]
                                 ]
                     ],
+    [$class: 'CascadeChoiceParameter',
+                                choiceType: 'PT_SINGLE_SELECT',
+                                description: 'Select the Env Name from the Dropdown List',
+                                filterLength: 1,
+                                filterable: true,
+                                name: 'RepoNextVer',
+                                randomName: 'choice-parameter-5631314439613991',
+                                script: [
+                                    $class: 'GroovyScript',
+                                    fallbackScript: [
+                                        classpath: [],
+                                        sandbox: true,
+                                        script:"""
+                                            return[\'Could not get Env\']
+                                            """
+                                    ],
+                                    script: [
+                                        classpath: [],
+                                        sandbox: true,
+                                        script:"""
+                                        import groovy.json.JsonSlurper
+                                     try {
+ 
+                                        def http = new URL('https://api.github.com/user/repos?visibility=all&per_page=222').openConnection() as HttpURLConnection
+                                        http.setRequestMethod('GET')
+                                        http.setDoOutput(true)
+                                        http.setRequestProperty('Authorization', 'token ${GIT_REPO_TOKEN}')
+                                        http.connect()
+                                        def response = [:]
+                                        if (http.responseCode == 200) {
+                                            response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
+                                        } else {
+                                            response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
+                                        }
+                                        def resArr = []
+                                        response .each { resArr.push(it.name) }
 
+
+                                          def nextversion
+                                        def isInteger= ImageVersion.toString().isInteger()
+                                        if(isInteger){
+                                        nextversion= Integer.parseInt(ImageVersion )+1
+                                        }else{
+                                        nextversion = 1
+
+
+
+                                        return [nextversion]
+                                     } catch (Exception e) {
+                                          return [e.toString()]
+                                     }
+                                            """
+                                    ]
+                                ]
+                    ],
                             [$class: 'DynamicReferenceParameter',
                                     choiceType: 'ET_FORMATTED_HTML',
                                     omitValueField: true,
