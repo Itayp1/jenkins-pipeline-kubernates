@@ -108,7 +108,7 @@ pipeline {
                                                             response.results.each { resArr.push(it.name) }
                                                             // return resArr
 
-                                                               inputBox="<p>"+${RepoName}+"</p>"
+                                                               inputBox="<p>"+RepoName+"</p>"
 
                                                             } catch (Exception e) {
                                                         // return [e.toString()]
