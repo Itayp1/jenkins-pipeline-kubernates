@@ -88,30 +88,29 @@ pipeline {
                                                             script:
                                                                     """
                                              import groovy.json.JsonSlurper
-  try {
+//   try {
 
-                    def body = '{"id": 120}'
+                    // def body = '{"id": 120}'
                     def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
-                    http.setRequestMethod('GET')
-                    http.setDoOutput(true)
-                    http.setRequestProperty('Accept', 'application/json')
-                    http.setRequestProperty('Authorization', 'token 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')
+//                     http.setRequestMethod('GET')
+//                     http.setDoOutput(true)
+//                     http.setRequestProperty('Accept', 'application/json')
+//                     http.setRequestProperty('Authorization', 'token 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')
 
-                    http.outputStream.write(body.getBytes('UTF-8'))
-                    http.connect()
+//                     http.outputStream.write(body.getBytes('UTF-8'))
+//                     http.connect()
 
-                    def response = [:]
+//                     def response = [:]
 
-                    if (http.responseCode == 200) {
-                        response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
-                    } else {
-                        response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
-                    }
+//                     if (http.responseCode == 200) {
+//                         response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
+//                     } else {
+//                         response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
+//                     }
 
-                    println "response: ${response}"
-                } catch (Exception e) {
-  // handle exception, e.g. Host unreachable, timeout etc.
-  }
+//                     println "response: ${response}"
+//                 } catch (Exception e) {
+//    }
 
                                             if(NeedUpgradePC.equals('yes')) {
                                                 inputBox="<input name='value' type='text' value='Intel Core i5'>"
