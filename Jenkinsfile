@@ -171,7 +171,6 @@ pipeline {
                 echo 'Building..'
                 bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/${RepoName}.git"
                 bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
-                echo "build itayp/${RepoName}:${params.NextImageVersion}"
                 echo "params:${params}"
 
                 bat """
