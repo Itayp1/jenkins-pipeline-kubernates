@@ -22,7 +22,7 @@ pipeline {
                             ),
                string(
                                 defaultValue: 'scriptcrunch',
-                                name: 'STRING-PARAMETER',
+                                name: 'STRINGPARAMETER',
                                 trim: true
                             ),
                                [$class: 'CascadeChoiceParameter',
@@ -109,8 +109,8 @@ pipeline {
                                                             response.results.each { resArr.push(it.name) }
                                                             // return resArr
 
-                                                            scriptcrunch =resArr[0]
-                                                              inputBox='<input name="value" value=${scriptcrunch} type="text">'
+                                                            STRINGPARAMETER =resArr[0]
+                                                              inputBox='<input name="value" value=${STRINGPARAMETER} type="text">'
 
                                                             } catch (Exception e) {
                                                         // return [e.toString()]
