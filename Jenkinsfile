@@ -110,7 +110,7 @@ pipeline {
                                                             // return resArr
 
                                                             versionn =resArr[0]
-                                                              inputBox='<input name="value" value=${versionn} type="text">'
+                                                              inputBox='<input name="value" value=resArr[0] type="text">'
 
                                                             } catch (Exception e) {
                                                         // return [e.toString()]
