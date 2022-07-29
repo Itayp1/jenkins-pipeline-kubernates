@@ -91,7 +91,7 @@ pipeline {
 //   try {
 
                     // def body = '{"id": 120}'
-                    def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
+                    // def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
 //                     http.setRequestMethod('GET')
 //                     http.setDoOutput(true)
 //                     http.setRequestProperty('Accept', 'application/json')
