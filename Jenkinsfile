@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+/* groovylint-disable LineLength */
 /* groovylint-disable-next-line CompileStatic */
 
 pipeline {
@@ -110,7 +111,7 @@ pipeline {
 
                         }catch(Throwable t){
                             def ppp = "tssssssssssss.toString()"
-                           inputBox="<input name='value' type='text' value=ppp>"
+                           inputBox="<input name='value' type='text' value=$ppp>"
 
                         }
 
