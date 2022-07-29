@@ -5,7 +5,7 @@
 pipeline {
     agent any
     environment {
-        Git_REPO_TOKEN     = credentials('jenkinsRepo')
+        GIT_REPO_TOKEN     = credentials('jenkinsRepo')
      }
     stages {
         stage('Setup parameters') {
@@ -78,6 +78,8 @@ pipeline {
             filterable: true,
             name: 'Env3',
             randomName: 'choice-parameter-5631314439613978',
+             referencedParameters: 'GIT_REPO_TOKEN',
+
             script: [
                 $class: 'GroovyScript',
                 fallbackScript: [
@@ -97,7 +99,7 @@ import groovy.json.JsonSlurper
                     def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
                     http.setRequestMethod('GET')
                     http.setDoOutput(true)
-                     http.setRequestProperty('Authorization', 'token ${Git_REPO_TOKEN}')
+                     http.setRequestProperty('Authorization', 'token ${GIT_REPO_TOKEN}')
                     http.connect()
                     def response = [:]
                     if (http.responseCode == 200) {
