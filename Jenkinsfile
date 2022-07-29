@@ -85,6 +85,7 @@ pipeline {
                                                     script:
                                                             """
                                                                 import groovy.json.JsonSlurper
+                                                                def resArr = []
                                                         try {
 
                                                                 def http = new URL('https://hub.docker.com/v2/repositories/itayp/${RepoName}/tags?page_size=100').openConnection() as HttpURLConnection
@@ -98,9 +99,12 @@ pipeline {
                                                                 } else {
                                                                     response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
                                                                 }
-                                                            def resArr = []
+
                                                             response.results.each { resArr.push(it.name) }
                                                             // return resArr
+                                                            } catch (Exception e) {
+                                                        // return [e.toString()]
+                                                        }
 
                                     if(RepoName.equals('api-connect')) {
                                            inputBox='<input name="value" value="${resArr[0]}" type="text">'
@@ -108,9 +112,6 @@ pipeline {
                                     } else {
                                         inputBox="<input name='value' type='text' value='Intel Core i5' disabled>"
                                     }
-                                                             } catch (Exception e) {
-                                                        // return [e.toString()]
-                                                        }
                                 """
                                             ]
                                     ]
