@@ -87,7 +87,7 @@ pipeline {
                 ],
                 script: [
                     classpath: [],
-                    sandbox: true,
+                    sandbox: false,
                     script:"""
 
                           return ['dfdf']
