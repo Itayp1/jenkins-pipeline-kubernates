@@ -111,8 +111,7 @@ pipeline {
 
                         }catch(Throwable t){
                             ppp = "tssssssssssss.toString()"
-                               inputBox=""<input type=\"text\" name=\"value\" value=\"${ppp}\" />"
-                        //    inputBox="<input name='value' type='text' value=${ppp}>"
+                            inputBox="<input name='value' type='text' value=ppp>"
 
                         }
 
