@@ -40,38 +40,7 @@ pipeline {
                             //     trim: true
                             // ),
                             choice(name:'deploy_env', choices:['yes', 'no'], description: 'Do you need upgrade your PC'),
-                            [$class: 'DynamicReferenceParameter',
-                                    choiceType: 'ET_FORMATTED_HTML',
-                                    omitValueField: true,
-                                    description: 'Please provide a Elastic alias label',
-                                    name: 'PC_RAM',
-                                    randomName: 'choice-parameter-5631314456178624',
-                                    referencedParameters: 'Env',
-                                    script: [
-                                            $class: 'GroovyScript',
-                                            fallbackScript: [
-                                                    classpath: [],
-                                                    sandbox: true,
-                                                    script:
-                                                            'return[\'nothing.....\']'
-                                            ],
-                                            script: [
-                                                    classpath: [],
-                                                    sandbox: true,
-                                                    script:
-                                                            """
-                                            if(Env.equals('Build')) {
-                                                // return "dddddddddddd"
-                                                inputBox="<input name='value' type='text' value='Kingston 8GB'>"
-                                            } else {
-                                                                                                // return "dsdffsfddddddd"
 
-                                                inputBox="<input name='value' type='text' value='Kingston 8GB' disabled>"
-                                            }
-                                        """
-                                            ]
-                                    ]
-                                ],
           [$class: 'CascadeChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Select the Env Name from the Dropdown List',
@@ -116,6 +85,38 @@ pipeline {
                 ]
             ]
         ],
+          [$class: 'DynamicReferenceParameter',
+                                    choiceType: 'PT_SINGLE_SELECT',
+                                    omitValueField: true,
+                                    description: 'Please provide a Elastic alias label',
+                                    name: 'PC_RAM',
+                                    randomName: 'choice-parameter-5631314456178624',
+                                    referencedParameters: 'Env',
+                                    script: [
+                                            $class: 'GroovyScript',
+                                            fallbackScript: [
+                                                    classpath: [],
+                                                    sandbox: true,
+                                                    script:
+                                                            'return[\'nothing.....\']'
+                                            ],
+                                            script: [
+                                                    classpath: [],
+                                                    sandbox: true,
+                                                    script:
+                                                            """
+                                            if(Env.equals('Build')) {
+                                                // return "dddddddddddd"
+                                                inputBox="<input name='value' type='text' value='Kingston 8GB'>"
+                                            } else {
+                                                                                                // return "dsdffsfddddddd"
+
+                                                inputBox="<input name='value' type='text' value='Kingston 8GB' disabled>"
+                                            }
+                                        """
+                                            ]
+                                    ]
+                                ],
                   [$class: 'ChoiceParameter',
             choiceType: 'PT_SINGLE_SELECT',
             description: 'Select the Env Name from the Dropdown List',
