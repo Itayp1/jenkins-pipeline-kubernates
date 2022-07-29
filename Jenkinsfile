@@ -110,7 +110,7 @@ pipeline {
 
                         }catch(Throwable t){
                             def ppp = t.toString()
-                           inputBox="<input name='value' type='text' value=ppp>"
+                           inputBox="<input name='value' type='text' value=$ppp>"
 
                         }
 
