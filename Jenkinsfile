@@ -85,7 +85,7 @@ pipeline {
                                                     script:
                                                             """
                                     if(RepoName.equals('api-connect')) {
-                                        inputBox="<input name='value' type='text' value='Intel Core i5'>"
+                                        inputBox="<input name='value' type='text' value='Intel Core i7'>"
                                     } else {
                                         inputBox="<input name='value' type='text' value='Intel Core i5' disabled>"
                                     }
