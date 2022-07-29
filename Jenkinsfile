@@ -108,8 +108,7 @@ pipeline {
                                                             response.results.each { resArr.push(it.name) }
                                                             // return resArr
 
-                                                            STRINGPARAMETER =resArr[0]
-                                                              inputBox='<p>'+response.results[0]+'</p>'
+                                                               inputBox='<p>'+response.results[0].name+'</p>'
 
                                                             } catch (Exception e) {
                                                         // return [e.toString()]
