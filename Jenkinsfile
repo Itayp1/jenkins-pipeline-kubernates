@@ -48,7 +48,7 @@ pipeline {
                                         import groovy.json.JsonSlurper
                                      try {
 
-                                        def http = new URL('https://api.github.com/user/repos?visibility=all').openConnection() as HttpURLConnection
+                                        def http = new URL('https://api.github.com/user/repos?visibility=all&per_page=222').openConnection() as HttpURLConnection
                                         http.setRequestMethod('GET')
                                         http.setDoOutput(true)
                                         http.setRequestProperty('Authorization', 'token ${GIT_REPO_TOKEN}')
