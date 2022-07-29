@@ -145,10 +145,8 @@ pipeline {
                                                         def isInteger= ImageVersion.toString().isInteger()
                                                         if(isInteger){
                                                         nextversion= Integer.parseInt(ImageVersion )+1
-                                                        NEXT_VERSION = nextversion
-                                                        }else{
+                                                         }else{
                                                         nextversion = 1
-                                                        NEXT_VERSION=1
 
                                                         }
 
