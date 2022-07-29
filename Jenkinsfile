@@ -89,26 +89,27 @@ pipeline {
                     classpath: [],
                     sandbox: false,
                     script:"""
-                    import groovy.json.JsonSlurper
-                   try {
+                //     import groovy.json.JsonSlurper
+                //    try {
 
-                    def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
-                    http.setRequestMethod('GET')
-                    http.setDoOutput(true)
-                     http.setRequestProperty('Authorization', 'token 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 ')
-                    http.connect()
-                    def response = [:]
-                    if (http.responseCode == 200) {
-                        response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
-                    } else {
-                        response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
-                    }
-                    def resArr = []
-                    response .each { resArr.push(it.name) }
-                    return resArr
-                 } catch (Exception e) {
-                    return [e.toString()]
-                        }
+                //     def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
+                //     http.setRequestMethod('GET')
+                //     http.setDoOutput(true)
+                //      http.setRequestProperty('Authorization', 'token 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 ')
+                //     http.connect()
+                //     def response = [:]
+                //     if (http.responseCode == 200) {
+                //         response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
+                //     } else {
+                //         response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
+                //     }
+                //     def resArr = []
+                //     response .each { resArr.push(it.name) }
+                //     return resArr
+                //  } catch (Exception e) {
+                //     return [e.toString()]
+                //         }
+                          return ["dfdf"]
                         """
                 ]
             ]
