@@ -50,13 +50,13 @@ pipeline {
                                             $class: 'GroovyScript',
                                             fallbackScript: [
                                                     classpath: [],
-                                                    sandbox: false,
+                                                    sandbox: true,
                                                     script:
                                                             'return[\'nothing.....\']'
                                             ],
                                             script: [
                                                     classpath: [],
-                                                    sandbox: false,
+                                                    sandbox: true,
                                                     script:
                                                             """
                                             if(NeedUpgradePC.equals('yes')) {
