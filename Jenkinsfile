@@ -48,7 +48,7 @@ pipeline {
                                         import groovy.json.JsonSlurper
                                      try {
 
-                                        def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
+                                        def http = new URL('https://api.github.com/user/repos?visibility=all').openConnection() as HttpURLConnection
                                         http.setRequestMethod('GET')
                                         http.setDoOutput(true)
                                         http.setRequestProperty('Authorization', 'token ${GIT_REPO_TOKEN}')
@@ -75,7 +75,7 @@ pipeline {
                                     description: 'Please provide a Elastic alias label',
                                     name: 'PC_CPU',
                                     randomName: 'choice-parameter-5631314456178624',
-                                    referencedParameters: 'RepoName, STRINGPARAMETER',
+                                    referencedParameters: 'RepoName',
                                     script: [
                                             $class: 'GroovyScript',
                                             fallbackScript: [
