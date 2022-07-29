@@ -107,9 +107,9 @@ STRINGPARAMETER ="fffffffffffffffffffff"
                                         response.each { resArr.push(it.name) }
 
                                           def nextversion
-                                        def isInteger= ImageVersion.toString().isInteger()
+                                        def isInteger= resArr[0].toString().isInteger()
                                         if(isInteger){
-                                        nextversion= Integer.parseInt(ImageVersion )+1
+                                        nextversion= Integer.parseInt(resArr[0] )+1
                                         }else{
                                         nextversion = 1
 
