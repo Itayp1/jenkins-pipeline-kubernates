@@ -110,7 +110,7 @@ pipeline {
                            inputBox="<input name='value' type='text' value="dddd">"
 
                         }catch(Throwable t){
-                            ppp = "tssssssssssss.toString()"
+                            ppp = "t.toString()"
                             inputBox="<input name='value' type='text' value=ppp>"
 
                         }
