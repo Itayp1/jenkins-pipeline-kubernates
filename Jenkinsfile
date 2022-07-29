@@ -1,10 +1,21 @@
 #!/usr/bin/env groovy
 pipeline {
     agent any
+
     stages {
-        stage('Welcome Step') {
+        stage('Build') {
             steps {
-                echo 'Welcome to LambdaTe2st'
+                echo 'Building..'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
