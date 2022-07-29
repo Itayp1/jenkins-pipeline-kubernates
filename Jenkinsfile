@@ -7,6 +7,7 @@ pipeline {
     environment {
         GIT_REPO_TOKEN     = credentials('jenkinsRepo')
         DOCKER_HUB_TOKEN = credentials('DOCKER_HUB_TOKEN')
+        VERSION = 1
     }
     stages {
         stage('Setup parameters') {
@@ -85,7 +86,7 @@ pipeline {
                                                     script:
                                                             """
                                                                 import groovy.json.JsonSlurper
-                                                                def resArr = []
+
                                                         try {
 
                                                                 def http = new URL('https://hub.docker.com/v2/repositories/itayp/${RepoName}/tags?page_size=100').openConnection() as HttpURLConnection
@@ -99,15 +100,16 @@ pipeline {
                                                                 } else {
                                                                     response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
                                                                 }
-
+                                                            def resArr = []
                                                             response.results.each { resArr.push(it.name) }
                                                             // return resArr
+                                                            VERSION = resArr[0]
                                                             } catch (Exception e) {
                                                         // return [e.toString()]
                                                         }
 
                                     if(RepoName.equals('api-connect')) {
-                                           inputBox='<input name="value" value="${resArr[0]}" type="text">'
+                                           inputBox='<input name="value" value="${VERSION}" type="text">'
 
                                     } else {
                                         inputBox="<input name='value' type='text' value='Intel Core i5' disabled>"
