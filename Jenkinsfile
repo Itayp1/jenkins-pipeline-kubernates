@@ -72,9 +72,9 @@ pipeline {
                             [$class: 'DynamicReferenceParameter',
                                     choiceType: 'ET_FORMATTED_HTML',
                                     omitValueField: true,
-                                    description: 'Please provide a Elastic alias label',
-                                    name: 'PC_CPU',
-                                    randomName: 'choice-parameter-5631314456178624',
+                                    description: 'the last version of the image',
+                                    name: 'Image_Version',
+                                    randomName: 'choice-parameter-5631314456178621',
                                     referencedParameters: 'RepoName',
                                     script: [
                                             $class: 'GroovyScript',
@@ -93,7 +93,7 @@ pipeline {
 
                                                         try {
 
-                                                                def http = new URL('https://hub.docker.com/v2/repositories/itayp/trading-alert/tags?page_size=100').openConnection() as HttpURLConnection
+                                                                def http = new URL('https://hub.docker.com/v2/repositories/itayp/${RepoName}/tags?page_size=100').openConnection() as HttpURLConnection
                                                                 http.setRequestMethod('GET')
                                                                 http.setDoOutput(true)
                                                                 http.setRequestProperty('Authorization', 'JWT ${DOCKER_HUB_TOKEN}')
