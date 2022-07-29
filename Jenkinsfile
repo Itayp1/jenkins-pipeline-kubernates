@@ -93,8 +93,8 @@ pipeline {
                     classpath: [],
                     sandbox: true,
                     script:"""
-import groovy.json.JsonSlurper
-    try {
+                    import groovy.json.JsonSlurper
+             try {
 
                     def http = new URL('https://api.github.com/user/repos?visibility=private').openConnection() as HttpURLConnection
                     http.setRequestMethod('GET')
@@ -107,12 +107,12 @@ import groovy.json.JsonSlurper
                     } else {
                         response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
                     }
-def resArr = []
-response .each { resArr.push(it.name) }
-return resArr
+                def resArr = []
+                response .each { resArr.push(it.name) }
+                return resArr
                  } catch (Exception e) {
-return [e.toString()]
-    }
+                return [e.toString()]
+                }
                         """
                 ]
             ]
