@@ -1,0 +1,19 @@
+apiVersion: "networking.k8s.io/v1"
+kind: "Ingress"
+metadata:
+  name: "tmpServiceName"
+  namespace: "qa"
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - host: "tmpServiceName-qa.itayp-dev.com"
+      http:
+        paths:
+          - pathType: "Prefix"
+            path: "/"
+            backend:
+              service:
+                name: "tmpServiceName"
+                port:
+                  number: 443

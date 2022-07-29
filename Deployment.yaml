@@ -1,0 +1,33 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "tmpServiceName"
+  namespace: "qa"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "tmpServiceName"
+  template:
+    metadata:
+      labels:
+        app: "tmpServiceName"
+    spec:
+      containers:
+        - name: "tmpServiceName"
+          image: "itayp/tmpServiceName"
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: "/health"
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          env:
+            - name: "ENV"
+              value: "I WAS IN QA"
+            - name: "SQL_PORT"
+              value: "I WAS THERE"
+            - name: "SQL_SERVER"
+              value: "172.1.2.3"

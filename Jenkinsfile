@@ -73,7 +73,7 @@ pipeline {
                                     choiceType: 'ET_FORMATTED_HTML',
                                     omitValueField: true,
                                     description: 'the last version of the image',
-                                    name: 'Image_Version',
+                                    name: 'ImageVersion',
                                     randomName: 'choice-parameter-5631314456178621',
                                     referencedParameters: 'RepoName',
                                     script: [
@@ -118,6 +118,35 @@ pipeline {
                                 """
                                             ]
                                     ]
+                            ],
+                            [$class: 'DynamicReferenceParameter',
+                                    choiceType: 'ET_FORMATTED_HTML',
+                                    omitValueField: true,
+                                    description: 'the last version of the image',
+                                    name: 'NextImageVersion',
+                                    randomName: 'choice-parameter-5631314456178622',
+                                    referencedParameters: 'ImageVersion',
+                                    script: [
+                                            $class: 'GroovyScript',
+                                            fallbackScript: [
+                                                    classpath: [],
+                                                    sandbox: true,
+                                                    script:
+                                                            'return[\'nothing.....\']'
+                                            ],
+                                            script: [
+                                                    classpath: [],
+                                                    sandbox: true,
+                                                    script:
+                                                            '''
+                                                            def nextVer = ImageVersion+1
+                                                               inputBox="<p>"+nextVer+"</p>"
+
+                                                        return inputBox
+
+                                '''
+                                            ]
+                                    ]
                             ]
                                     ])
                     ])
@@ -130,6 +159,7 @@ pipeline {
 
                 echo 'Building..'
                 bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/${RepoName}.git"
+                bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
             }
         }
         stage('Test') {
