@@ -125,7 +125,7 @@ pipeline {
             filterable: true,
             name: 'ImageVersion',
             randomName: 'choice-parameter-5631314439613978',
-             referencedParameters: 'GIT_REPO_TOKEN',
+             referencedParameters: 'RepoName',
 
             script: [
                 $class: 'GroovyScript',
@@ -143,7 +143,7 @@ pipeline {
                     import groovy.json.JsonSlurper
              try {
 
-                    def http = new URL('https://hub.docker.com/v2/repositories/itayp/hello-world-kubernates/tags?page_size=100').openConnection() as HttpURLConnection
+                    def http = new URL('https://hub.docker.com/v2/repositories/itayp/${RepoName}/tags?page_size=100').openConnection() as HttpURLConnection
                     http.setRequestMethod('GET')
                     http.setDoOutput(true)
                      http.setRequestProperty('Authorization', 'JWT ${DOCKER_HUB_TOKEN}')
