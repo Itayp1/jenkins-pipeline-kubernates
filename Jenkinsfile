@@ -246,7 +246,7 @@ pipeline {
                     // writeFile file:"${RepoName}/Ingress.yaml", text:yamlToString(yaml2)
 
                     bat """
-                    cd ${RepoName}
+                    cd jenkins-pipeline-kubernates
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Deployment.yaml
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Ingress.yaml
                     """
