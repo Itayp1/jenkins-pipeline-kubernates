@@ -121,6 +121,8 @@ pipeline {
                                 filterable: true,
                                 name: 'RepoName2',
                                 randomName: 'choice-parameter-5631314439613946',
+                                                                    referencedParameters: 'RepoName',
+
                                 script: [
                                     $class: 'GroovyScript',
                                     fallbackScript: [
