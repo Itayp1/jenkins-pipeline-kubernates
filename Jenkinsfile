@@ -216,11 +216,11 @@ pipeline {
                     echo 'Deploying....'
                     file = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml")
                     newConfig = file.text.replace('tmpServiceName', "${RepoName}")
-                    file.text = newConfig
+                    writeFile fileW:"${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml", text:newConfig
 
                     file2 = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Ingress.yaml")
-                    newConfig = file2.text.replace('tmpServiceName', "${RepoName}")
-                    file2.text = newConfig
+                    newConfig2 = file2.text.replace('tmpServiceName', "${RepoName}")
+                    writeFile fileW2:"${WORKSPACE}/jenkins-pipeline-kubernates/Ingress.yaml", text:newConfig2
 
                     // def yaml = readYaml file: 'Deployment.yaml'
 
