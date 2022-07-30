@@ -213,7 +213,9 @@ pipeline {
             steps {
                 echo 'Deploying....'
                 script {
-                    def yaml = readYaml file: 'RepoName/Deployment.yaml'
+                    folder(RepoName) {
+                        def yaml = readYaml file: 'Deployment.yaml'
+                    }
                 }
                     // yaml.metadata.name = RepoName
                 //     yaml.spec.selector.matchLabels.app = RepoName
