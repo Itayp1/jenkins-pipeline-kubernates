@@ -213,21 +213,28 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying....'
+                    def file = new File("${RepoName}/Deployment.yaml")
+                    def newConfig = file.text.replace('tmpServiceName', "${RepoName}")
+                    file.text = newConfig
 
-                    def yaml = readYaml file: 'Deployment.yaml'
+                    def file2 = new File("${RepoName}/Ingress.yaml")
+                    def newConfig = file2.text.replace('tmpServiceName', "${RepoName}")
+                    file2.text = newConfig
 
-                    yaml.metadata.name = RepoName
-                    yaml.spec.selector.matchLabels.app = RepoName
-                    yaml.spec.template.metadata.labels.app = RepoName
-                    yaml.spec.template.spec.containers.name = RepoName
-                    yaml.spec.template.spec.containers.image = "itayp/${RepoName}:${NextImageVersion}"
-                    writeFile file:"${RepoName}/Deployment.yaml", text:yamlToString(yaml)
+                    // def yaml = readYaml file: 'Deployment.yaml'
 
-                    def yaml2 = readYaml file: "${RepoName}/Ingress.yaml"
-                    yaml2.metadata.name = RepoName
-                    yaml2.spec.rules[0].host = RepoName - qa.itayp - dev.com
-                    yaml2.spec.rules[0].paths[0].backend.service.name = RepoName
-                    writeFile file:"${RepoName}/Ingress.yaml", text:yamlToString(yaml2)
+                    // yaml.metadata.name = RepoName
+                    // yaml.spec.selector.matchLabels.app = RepoName
+                    // yaml.spec.template.metadata.labels.app = RepoName
+                    // yaml.spec.template.spec.containers.name = RepoName
+                    // yaml.spec.template.spec.containers.image = "itayp/${RepoName}:${NextImageVersion}"
+                    // writeFile file:"${RepoName}/Deployment.yaml", text:yamlToString(yaml)
+
+                    // def yaml2 = readYaml file: "${RepoName}/Ingress.yaml"
+                    // yaml2.metadata.name = RepoName
+                    // yaml2.spec.rules[0].host = RepoName - qa.itayp - dev.com
+                    // yaml2.spec.rules[0].paths[0].backend.service.name = RepoName
+                    // writeFile file:"${RepoName}/Ingress.yaml", text:yamlToString(yaml2)
 
                     bat """
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Deployment.yaml
