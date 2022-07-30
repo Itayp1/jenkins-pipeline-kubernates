@@ -216,7 +216,7 @@ pipeline {
                     echo 'Deploying....'
                     file = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml")
                     newConfig = file.text.replace('tmpServiceNameImage', "itayp/${RepoName}:${NextImageVersion}")
-                    newConfig = newConfig.text.replace('tmpServiceName', "${RepoName}")
+                    newConfig = newConfig.replace('tmpServiceName', "${RepoName}")
                     writeFile file:"${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml", text:newConfig
 
                     file2 = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Ingress.yaml")
