@@ -158,7 +158,7 @@ pipeline {
                                                         nextversion = 1
                                                         }
 
-                                        return [nextversion]
+                                        return [resArre]
                                      } catch (Exception e) {
                                           return [e.toString()]
                                      }
