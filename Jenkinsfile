@@ -218,7 +218,7 @@ pipeline {
                     newConfig = file.text.replace('tmpServiceNameImage', "itayp/${RepoName}:${NextImageVersion}popo")
                     newConfig = newConfig.replace('tmpServiceName', "${RepoName}")
                     writeFile file:"${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml", text:newConfig
-
+                    println(newConfig)
                     file2 = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Ingress.yaml")
                     newConfig2 = file2.text.replace('tmpServiceName', "${RepoName}")
 
