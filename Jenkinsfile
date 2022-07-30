@@ -7,7 +7,6 @@ pipeline {
     environment {
         GIT_REPO_TOKEN     = credentials('jenkinsRepo')
         DOCKER_HUB_TOKEN = credentials('DOCKER_HUB_TOKEN')
-        NEXT_VERSION = ''
     }
     stages {
         stage('Setup parameters') {
@@ -119,10 +118,9 @@ pipeline {
                                 description: 'Select the Env Name from the Dropdown List',
                                 filterLength: 1,
                                 filterable: true,
-                                name: 'RepoName2',
+                                name: 'NextImageVersion',
                                 randomName: 'choice-parameter-5631314439613946',
-                                                                    referencedParameters: 'RepoName',
-
+                                referencedParameters: 'RepoName',
                                 script: [
                                     $class: 'GroovyScript',
                                     fallbackScript: [
