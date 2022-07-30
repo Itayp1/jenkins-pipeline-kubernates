@@ -7,7 +7,7 @@ pipeline {
     environment {
         GIT_REPO_TOKEN     = credentials('jenkinsRepo')
         DOCKER_HUB_TOKEN = credentials('DOCKER_HUB_TOKEN')
-        KUBECONFIG = credentials('my-kubeconfig')
+        KUBECONFIG = credentials('KUBECONFIG')
     }
     stages {
         stage('Setup parameters') {
