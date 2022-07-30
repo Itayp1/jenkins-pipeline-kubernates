@@ -212,7 +212,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                def yaml = readYaml file: "${RepoName}/Deployment.yaml"
+                yaml = readYaml file: "${RepoName}/Deployment.yaml"
 
                     // yaml.metadata.name = RepoName
                 //     yaml.spec.selector.matchLabels.app = RepoName
