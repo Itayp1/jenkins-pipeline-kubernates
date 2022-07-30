@@ -187,37 +187,37 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                echo 'Building..'
-                bat """
-                 cd ${RepoName}
-                 docker build -t ${RepoName}:latest .
-                 docker tag ${RepoName}:latest itayp/${RepoName}:${NextImageVersion}
+        // stage('Build') {
+        //     steps {
+        //         echo 'Building..'
+        //         bat """
+        //          cd ${RepoName}
+        //          docker build -t ${RepoName}:latest .
+        //          docker tag ${RepoName}:latest itayp/${RepoName}:${NextImageVersion}
 
-                """
-            }
-        }
-        stage('Upload Image To Artifactory') {
-            steps {
-                echo 'Upload Image To Artifactory..'
-                bat """
-                 cd ${RepoName}
-                 docker logout
-                 docker login -u itayp -p Alroe2018
-                 docker push itayp/${RepoName}:${NextImageVersion}
-                """
-            }
-        }
+        //         """
+        //     }
+        // }
+        // stage('Upload Image To Artifactory') {
+        //     steps {
+        //         echo 'Upload Image To Artifactory..'
+        //         bat """
+        //          cd ${RepoName}
+        //          docker logout
+        //          docker login -u itayp -p Alroe2018
+        //          docker push itayp/${RepoName}:${NextImageVersion}
+        //         """
+        //     }
+        // }
         stage('Deploy') {
             steps {
                 script {
                     echo 'Deploying....'
-                    file = new File("${RepoName}/Deployment.yaml")
+                    file = new File("${WORKSPACE}/${RepoName}/Deployment.yaml")
                     newConfig = file.text.replace('tmpServiceName', "${RepoName}")
                     file.text = newConfig
 
-                    file2 = new File("${RepoName}/Ingress.yaml")
+                    file2 = new File("${WORKSPACE}/${RepoName}/Ingress.yaml")
                     newConfig = file2.text.replace('tmpServiceName', "${RepoName}")
                     file2.text = newConfig
 
