@@ -182,6 +182,7 @@ pipeline {
                 echo 'Cloning The Repo..'
                 bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/${RepoName}.git"
                 bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
+
                 echo "params:${params}"
                 echo "env:${env}"
             }
@@ -213,11 +214,11 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying....'
-                    file = new File("${WORKSPACE}/${RepoName}/Deployment.yaml")
+                    file = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml")
                     newConfig = file.text.replace('tmpServiceName', "${RepoName}")
                     file.text = newConfig
 
-                    file2 = new File("${WORKSPACE}/${RepoName}/Ingress.yaml")
+                    file2 = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Ingress.yaml")
                     newConfig = file2.text.replace('tmpServiceName', "${RepoName}")
                     file2.text = newConfig
 
