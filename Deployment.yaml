@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: "tmpServiceName"
-          image: "itayp/tmpServiceName"
+          image: "tmpServiceNameImage"
           ports:
             - containerPort: 3000
           livenessProbe:
