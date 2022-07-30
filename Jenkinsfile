@@ -220,10 +220,11 @@ pipeline {
                     writeFile file:"${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml", text:newConfig
 
                     popo = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml")
+                    popo2 = popo.text.replace('popo', 'popo')
 
                     println('popo')
 
-                    println(popo)
+                    println(popo2)
                     file2 = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Ingress.yaml")
                     newConfig2 = file2.text.replace('tmpServiceName', "${RepoName}")
 
