@@ -214,6 +214,7 @@ pipeline {
                 echo 'Deploying....'
 
                 folder(RepoName) {
+                    bat 'dir'
                     def yaml = readYaml file: 'Deployment.yaml'
                     yaml.metadata.name = RepoName
                     yaml.spec.selector.matchLabels.app = RepoName
