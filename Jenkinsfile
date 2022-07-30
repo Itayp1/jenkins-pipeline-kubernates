@@ -213,27 +213,24 @@ pipeline {
             steps {
                 echo 'Deploying....'
 
-                folder(RepoName) {
-                    bat 'dir'
-                    def yaml = readYaml file: 'Deployment.yaml'
+                def yaml = readYaml file: "${RepoName}/Deployment.yaml"
                     yaml.metadata.name = RepoName
                     yaml.spec.selector.matchLabels.app = RepoName
                     yaml.spec.template.metadata.labels.app = RepoName
                     yaml.spec.template.spec.containers.name = RepoName
                     yaml.spec.template.spec.containers.image = "itayp/${RepoName}:${NextImageVersion}"
-                    writeFile file:'Deployment.yaml', text:yamlToString(yaml)
+                    writeFile file:"${RepoName}/Deployment.yaml", text:yamlToString(yaml)
 
-                    def yaml2 = readYaml file: 'Ingress.yaml'
+                    def yaml2 = readYaml file: "${RepoName}/Ingress.yaml"
                     yaml2.metadata.name = RepoName
                     yaml2.spec.rules[0].host = RepoName - qa.itayp - dev.com
                     yaml2.spec.rules[0].paths[0].backend.service.name = RepoName
-                    writeFile file:'Ingress.yaml', text:yamlToString(yaml2)
+                    writeFile file:"${RepoName}/Ingress.yaml", text:yamlToString(yaml2)
 
                     bat """
                  kubectl --kubeconfig ${KUBECONFIG}  apply -f Deployment.yaml
                  kubectl --kubeconfig ${KUBECONFIG}  apply -f Ingress.yaml
                 """
-                }
             }
         }
     }
