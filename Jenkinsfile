@@ -173,29 +173,37 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
+        stage('Clone') {
             steps {
                 cleanWs()
 
-                echo 'Building..'
+                echo 'Cloning The Repo..'
                 bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/${RepoName}.git"
                 bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
                 echo "params:${params}"
                 echo "env:${env}"
+            }
+        }
 
+        stage('Build') {
+            steps {
+                cleanWs()
+                echo 'Building..'
                 bat """
-
                  cd ${RepoName}
                  docker build -t itayp/${RepoName}:${NextImageVersion} .
+                """
+            }
+        }
+        stage('Upload Image To Artifactory') {
+            steps {
+                echo 'Upload Image To Artifactory..'
+                bat """
+                 cd ${RepoName}
                  docker logout
                  docker login -u itayp -p Alroe2018
                  docker push itayp/${RepoName}:${NextImageVersion}
                 """
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
             }
         }
         stage('Deploy') {
