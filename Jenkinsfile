@@ -220,7 +220,7 @@ pipeline {
                  yaml.spec.selector.matchLabels.app = RepoName
                  yaml.spec.template.metadata.labels.app = RepoName
                  yaml.spec.template.spec.containers.name = RepoName
-                 yaml.spec.template.spec.containers.image = itayp/RepoName:${NextImageVersion}
+                 yaml.spec.template.spec.containers.image = itayp/RepoName:NextImageVersion
                  writeFile file:"Deployment.yaml", text:yamlToString(yaml)
 
                  def yaml2 = readYaml file: "Ingress.yaml"
