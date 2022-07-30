@@ -213,12 +213,12 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying....'
-                    def file = new File("${RepoName}/Deployment.yaml")
-                    def newConfig = file.text.replace('tmpServiceName', "${RepoName}")
+                    file = new File("${RepoName}/Deployment.yaml")
+                    newConfig = file.text.replace('tmpServiceName', "${RepoName}")
                     file.text = newConfig
 
-                    def file2 = new File("${RepoName}/Ingress.yaml")
-                    def newConfig = file2.text.replace('tmpServiceName', "${RepoName}")
+                    file2 = new File("${RepoName}/Ingress.yaml")
+                    newConfig = file2.text.replace('tmpServiceName', "${RepoName}")
                     file2.text = newConfig
 
                     // def yaml = readYaml file: 'Deployment.yaml'
