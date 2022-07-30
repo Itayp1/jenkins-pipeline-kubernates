@@ -149,7 +149,16 @@ pipeline {
                                         }
                                         def resArr = []
                                         response .each { resArr.push(it.name) }
-                                        return resArr
+                                        def ImageVersion = resArr[0]
+                                          def nextversion
+                                                        def isInteger= ImageVersion.toString().isInteger()
+                                                        if(isInteger){
+                                                        nextversion= Integer.parseInt(ImageVersion )+1
+                                                         }else{
+                                                        nextversion = 1
+                                                        }
+
+                                        return [nextversion]
                                      } catch (Exception e) {
                                           return [e.toString()]
                                      }
