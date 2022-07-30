@@ -173,6 +173,7 @@ pipeline {
                 }
             }
         }
+
         stage('Clone') {
             steps {
                 cleanWs()
@@ -187,11 +188,12 @@ pipeline {
 
         stage('Build') {
             steps {
-                cleanWs()
                 echo 'Building..'
                 bat """
                  cd ${RepoName}
-                 docker build -t itayp/${RepoName}:${NextImageVersion} .
+                 docker build -t ${RepoName}:latest .
+                 docker tag ${RepoName}:latest itayp/${RepoName}:${NextImageVersion}
+
                 """
             }
         }
