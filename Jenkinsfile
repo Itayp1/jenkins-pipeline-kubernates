@@ -188,28 +188,28 @@ pipeline {
             }
         }
 
-        // stage('Build') {
-        //     steps {
-        //         echo 'Building..'
-        //         bat """
-        //          cd ${RepoName}
-        //          docker build -t ${RepoName}:latest .
-        //          docker tag ${RepoName}:latest itayp/${RepoName}:${NextImageVersion}
+        stage('Build') {
+            steps {
+                echo 'Building..'
+                bat """
+                 cd ${RepoName}
+                 docker build -t ${RepoName}:latest .
+                 docker tag ${RepoName}:latest itayp/${RepoName}:${NextImageVersion}
 
-        //         """
-        //     }
-        // }
-        // stage('Upload Image To Artifactory') {
-        //     steps {
-        //         echo 'Upload Image To Artifactory..'
-        //         bat """
-        //          cd ${RepoName}
-        //          docker logout
-        //          docker login -u itayp -p Alroe2018
-        //          docker push itayp/${RepoName}:${NextImageVersion}
-        //         """
-        //     }
-        // }
+                """
+            }
+        }
+        stage('Upload Image To Artifactory') {
+            steps {
+                echo 'Upload Image To Artifactory..'
+                bat """
+                 cd ${RepoName}
+                 docker logout
+                 docker login -u itayp -p Alroe2018
+                 docker push itayp/${RepoName}:${NextImageVersion}
+                """
+            }
+        }
         stage('Deploy') {
             steps {
                 script {
