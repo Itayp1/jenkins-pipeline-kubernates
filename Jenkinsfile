@@ -211,7 +211,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                script {
+                // script {
                     echo 'Deploying....'
                     file = new File("${RepoName}/Deployment.yaml")
                     newConfig = file.text.replace('tmpServiceName', "${RepoName}")
@@ -240,7 +240,7 @@ pipeline {
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Deployment.yaml
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Ingress.yaml
                     """
-                }
+                // }
             }
         }
     }
