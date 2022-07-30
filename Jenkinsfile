@@ -214,7 +214,7 @@ pipeline {
                 echo 'Deploying....'
                 bat """
                  cd ${RepoName}
- 
+
                  kubectl -kubeconfig ${KUBECONFIG}  apply -f Deployment.yaml
                  kubectl -kubeconfig ${KUBECONFIG}  apply -f Ingress.yaml
                 """
