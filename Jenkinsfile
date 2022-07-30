@@ -187,6 +187,7 @@ pipeline {
 
                  cd ${RepoName}
                  docker build -t itayp/${RepoName}:${NextImageVersion} .
+                 docker logout
                  docker login -u itayp -p Alroe2018
                  docker push itayp/${RepoName}:${NextImageVersion}
                 """
