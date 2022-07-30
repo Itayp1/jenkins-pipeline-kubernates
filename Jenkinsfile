@@ -136,20 +136,21 @@ pipeline {
                                         script:"""
                                         import groovy.json.JsonSlurper
                                      try {
-                                        def http = new URL('https://api.github.com/user/repos?visibility=all&per_page=222').openConnection() as HttpURLConnection
-                                        http.setRequestMethod('GET')
-                                        http.setDoOutput(true)
-                                        http.setRequestProperty('Authorization', 'token ${GIT_REPO_TOKEN}')
-                                        http.connect()
-                                        def response = [:]
-                                        if (http.responseCode == 200) {
-                                            response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
-                                        } else {
-                                            response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
-                                        }
-                                        def resArre = []
-                                        response.each { resArre.push(it.name) }
-                                        def ImageVersion = resArre[0]
+
+                                                                def http = new URL("https://hub.docker.com/v2/repositories/itayp/"+RepoName+"/tags?page_size=100").openConnection() as HttpURLConnection
+                                                                http.setRequestMethod('GET')
+                                                                http.setDoOutput(true)
+                                                                http.setRequestProperty('Authorization', 'JWT ${DOCKER_HUB_TOKEN}')
+                                                                http.connect()
+                                                                def response = [:]
+                                                                if (http.responseCode == 200) {
+                                                                    response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
+                                                                } else {
+                                                                    response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
+                                                                }
+                                                            def resArr = []
+                                                            response.results.each { resArr.push(it.name) }
+                                        def ImageVersion = resArr[0]
                                           def nextversion
                                                         def isInteger= ImageVersion.toString().isInteger()
                                                         if(isInteger){
@@ -158,7 +159,7 @@ pipeline {
                                                         nextversion = 1
                                                         }
 
-                                        return resArre
+                                        return [nextversion]
                                      } catch (Exception e) {
                                           return [e.toString()]
                                      }
