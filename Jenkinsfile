@@ -120,7 +120,7 @@ pipeline {
                                 filterLength: 1,
                                 filterable: true,
                                 name: 'RepoName2',
-                                randomName: 'choice-parameter-5631314439613978',
+                                randomName: 'choice-parameter-5631314439613946',
                                 script: [
                                     $class: 'GroovyScript',
                                     fallbackScript: [
@@ -158,7 +158,7 @@ pipeline {
                                                         nextversion = 1
                                                         }
 
-                                        return [resArre]
+                                        return resArre
                                      } catch (Exception e) {
                                           return [e.toString()]
                                      }
