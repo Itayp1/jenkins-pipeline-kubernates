@@ -185,9 +185,9 @@ pipeline {
 
                 bat """
 
-                // cd ${RepoName}
-                // docker build -t itayp/${RepoName}:${NextImageVersion} .
-                // docker push itayp/${RepoName}:${NextImageVersion}
+                 cd ${RepoName}
+                 docker build -t itayp/${RepoName}:${NextImageVersion} .
+                 docker push itayp/${RepoName}:${NextImageVersion}
                 """
             }
         }
