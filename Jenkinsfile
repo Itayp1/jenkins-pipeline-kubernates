@@ -147,9 +147,9 @@ pipeline {
                                         } else {
                                             response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
                                         }
-                                        def resArr = []
-                                        response .each { resArr.push(it.name) }
-                                        def ImageVersion = resArr[0]
+                                        def resArre = []
+                                        response.each { resArre.push(it.name) }
+                                        def ImageVersion = resArre[0]
                                           def nextversion
                                                         def isInteger= ImageVersion.toString().isInteger()
                                                         if(isInteger){
