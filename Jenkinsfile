@@ -109,7 +109,7 @@ pipeline {
                                                         nextversion = 0
                                                         }
 
-                                                  return "<input name=\\"value\\" value=\\"${ImageVersion}\\" type=\\"text\\" >"
+                                                  return "<input name=\\"value\\" value=\\"${response.toString()}\\" type=\\"text\\" >"
                                       } catch (Exception e) {
                                           return [e.toString()]
                                      }
@@ -123,7 +123,7 @@ pipeline {
                                     description: 'the last version of the image',
                                     name: 'ImageVersion',
                                     randomName: 'choice-parameter-5631314456178621',
-                                    referencedParameters: 'repoName,currentimage',
+                                    referencedParameters: 'RepoName, currentimage',
                                     script: [
                                             $class: 'GroovyScript',
                                             fallbackScript: [
