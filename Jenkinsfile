@@ -250,8 +250,8 @@ pipeline {
                 echo 'Building..'
                 sh """
                  cd ${RepoName}
-                 docker build -t ${RepoName}:latest .
-                 docker tag ${RepoName}:latest itayp/${RepoName}:${NextImageVersion}
+                 sudo docker build -t ${RepoName}:latest .
+                 sudo docker tag ${RepoName}:latest itayp/${RepoName}:${NextImageVersion}
 
                 """
             }
