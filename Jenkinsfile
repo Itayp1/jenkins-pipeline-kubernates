@@ -112,7 +112,7 @@ pipeline {
                                           return '<input name="value" value="' +nextversion+ '" type="text" >'
 
                                      } catch (Exception e) {
-                                          return '<input name="value" value="e.toString()" type="text" >'
+                                          return '<input name="value" value="' +e.toString()+ '" type="text" >'
 
                                      }
                                             """
