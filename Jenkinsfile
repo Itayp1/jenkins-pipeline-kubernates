@@ -252,8 +252,8 @@ pipeline {
                  cd ${RepoName}
                  whoami
 
-                docker build -t ${RepoName}:latest .
-                docker tag ${RepoName}:latest itayp/${RepoName}:${NextImageVersion}
+                 sudo docker build -t ${RepoName}:latest .
+                 sudo docker tag ${RepoName}:latest itayp/${RepoName}:${NextImageVersion}
 
                 """
             }
