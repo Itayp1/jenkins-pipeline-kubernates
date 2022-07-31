@@ -21,7 +21,7 @@ pipeline {
                                 choices: ['Build', 'Deploy']
                             ),
                                [$class: 'CascadeChoiceParameter',
-                                choiceType: 'PT_SINGLE_SELECT',
+                                choiceType: 'PT_MULTI_SELECT',
                                 description: 'Select the Env Name from the Dropdown List',
                                 filterLength: 1,
                                 filterable: true,
