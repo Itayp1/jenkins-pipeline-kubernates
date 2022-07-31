@@ -190,14 +190,14 @@ pipeline {
                                     script: [
                                         classpath: [],
                                         sandbox: true,
-                                        script:"""
+                                        script:'''
                                         import groovy.json.JsonSlurper
                                      try {
 
                                                                 def http = new URL("https://hub.docker.com/v2/repositories/itayp/"+RepoName+"/tags?page_size=100").openConnection() as HttpURLConnection
                                                                 http.setRequestMethod('GET')
                                                                 http.setDoOutput(true)
-                                                                http.setRequestProperty('Authorization', 'JWT ${DOCKER_HUB_TOKEN}')
+                                                                http.setRequestProperty('Authorization', "JWT ${DOCKER_HUB_TOKEN}")
                                                                 http.connect()
                                                                 def response = [:]
                                                                 if (http.responseCode == 200) {
@@ -220,7 +220,7 @@ pipeline {
                                      } catch (Exception e) {
                                           return [e.toString()]
                                      }
-                                            """
+                                            '''
                                     ]
                                 ]
                     ]
