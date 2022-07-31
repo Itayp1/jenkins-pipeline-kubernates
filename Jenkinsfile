@@ -237,8 +237,8 @@ pipeline {
                 cleanWs()
 
                 echo 'Cloning The Repo..'
-                bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/${RepoName}.git"
-                bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
+                sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/${RepoName}.git"
+                sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
 
                 echo "params:${params}"
                 echo "env:${env}"
@@ -248,7 +248,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                bat """
+                sh """
                  cd ${RepoName}
                  docker build -t ${RepoName}:latest .
                  docker tag ${RepoName}:latest itayp/${RepoName}:${NextImageVersion}
@@ -259,7 +259,7 @@ pipeline {
         stage('Upload Image To Artifactory') {
             steps {
                 echo 'Upload Image To Artifactory..'
-                bat """
+                sh """
                  cd ${RepoName}
                  docker logout
                  docker login -u itayp -p Alroe2018
@@ -296,7 +296,7 @@ pipeline {
                     // yaml2.spec.rules[0].paths[0].backend.service.name = RepoName
                     // writeFile file:"${RepoName}/Ingress.yaml", text:yamlToString(yaml2)
 
-                    bat """
+                    sh """
                     cd jenkins-pipeline-kubernates
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Deployment.yaml
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Ingress.yaml
