@@ -63,29 +63,29 @@ pipeline {
                                     ]
                                 ]
                     ],
-                         [$class: 'DynamicReferenceParameter',
-                                choiceType: 'ET_FORMATTED_HIDDEN_HTML',
-                                description: 'Select the Env Name from the Dropdown List',
-                                filterLength: 1,
-                                filterable: true,
-                                name: 'currentimage',
-                                randomName: 'choice-parameter-1231314439613946',
-                                referencedParameters: 'RepoName',
-                                script: [
-                                    $class: 'GroovyScript',
-                                    fallbackScript: [
-                                        classpath: [],
-                                        sandbox: true,
-                                        script:"""
-                                            return[\'Could not get Env\']
-                                            """
-                                    ],
+                            [$class: 'DynamicReferenceParameter',
+                                    choiceType: 'ET_FORMATTED_HTML',
+                                    omitValueField: true,
+                                    description: 'the last version of the image',
+                                    name: 'ImageVersion',
+                                    randomName: 'choice-parameter-5631314456178621',
+                                    referencedParameters: 'RepoName',
                                     script: [
-                                        classpath: [],
-                                        sandbox: true,
-                                        script:'''
-                                        import groovy.json.JsonSlurper
-                                     try {
+                                            $class: 'GroovyScript',
+                                            fallbackScript: [
+                                                    classpath: [],
+                                                    sandbox: true,
+                                                    script:
+                                                            'return[\'nothing.....\']'
+                                            ],
+                                            script: [
+                                                    classpath: [],
+                                                    sandbox: true,
+                                                    script:
+                                                            """
+                                                                import groovy.json.JsonSlurper
+
+                                                        try {
 
                                                                 def http = new URL("https://hub.docker.com/v2/repositories/itayp/"+RepoName+"/tags?page_size=100").openConnection() as HttpURLConnection
                                                                 http.setRequestMethod('GET')
@@ -100,45 +100,16 @@ pipeline {
                                                                 }
                                                             def resArr = []
                                                             response.results.each { resArr.push(it.name) }
-                                        def ImageVersion = resArr[0]
-                                          def nextversion
-                                                        def isInteger= ImageVersion.toString().isInteger()
-                                                        if(isInteger){
-                                                        nextversion= Integer.parseInt(ImageVersion )+1
-                                                         }else{
-                                                        nextversion = 1
+                                                            // return resArr
+
+                                                               inputBox="<p>"+resArr[0]+"</p>"
+
+                                                            } catch (Exception e) {
+                                                        // return [e.toString()]
                                                         }
+                                                        return inputBox
 
-                                                  return "<input name=\\"value\\" value=\\"${nextversion}\\" type=\\"text\\" >"
-                                      } catch (Exception e) {
-                                          return [e.toString()]
-                                     }
-                                            '''
-                                    ]
-                                ]
-                    ],
-                            [$class: 'DynamicReferenceParameter',
-                                    choiceType: 'ET_FORMATTED_HTML',
-                                    omitValueField: true,
-                                    description: 'the last version of the image',
-                                    name: 'ImageVersion',
-                                    randomName: 'choice-parameter-5631314456178621',
-                                    referencedParameters: 'currentimage',
-                                    script: [
-                                            $class: 'GroovyScript',
-                                            fallbackScript: [
-                                                    classpath: [],
-                                                    sandbox: true,
-                                                    script:
-                                                            'return[\'nothing.....\']'
-                                            ],
-                                            script: [
-                                                    classpath: [],
-                                                    sandbox: true,
-                                                    script:'''
-                                                       return "<b>${currentimage}<b>"
-
-                                '''
+                                """
                                             ]
                                     ]
                             ],
