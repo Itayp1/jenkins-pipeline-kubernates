@@ -147,7 +147,7 @@ pipeline {
                                     omitValueField: true,
                                     description: 'the last version of the image',
                                     name: 'nextversionnew',
-                                    randomName: 'choice-parameter-5631314456178621',
+                                    randomName: 'choice-parameter-5631314456178141',
                                     referencedParameters: 'RepoName,currentimage',
                                     script: [
                                             $class: 'GroovyScript',
