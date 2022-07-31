@@ -261,9 +261,9 @@ pipeline {
                 echo 'Upload Image To Artifactory..'
                 sh """
                  cd ${RepoName}
-                 docker logout
-                 docker login -u itayp -p Alroe2018
-                 docker push itayp/${RepoName}:${NextImageVersion}
+                 sudo docker logout
+                 sudo docker login -u itayp -p Alroe2018
+                 sudo docker push itayp/${RepoName}:${NextImageVersion}
                 """
             }
         }
