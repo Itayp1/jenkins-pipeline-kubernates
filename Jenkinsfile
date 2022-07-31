@@ -106,7 +106,7 @@ pipeline {
                                                         if(isInteger){
                                                         nextversion= Integer.parseInt(ImageVersion )+1
                                                          }else{
-                                                        nextversion = 1
+                                                        nextversion = 0
                                                         }
 
                                                   return "<input name=\\"value\\" value=\\"${nextversion}\\" type=\\"text\\" >"
@@ -148,7 +148,7 @@ pipeline {
                                     description: 'the last version of the image',
                                     name: 'nextversionnew',
                                     randomName: 'choice-parameter-5631314456178621',
-                                    referencedParameters: 'currentimage',
+                                    referencedParameters: 'RepoName',
                                     script: [
                                             $class: 'GroovyScript',
                                             fallbackScript: [
