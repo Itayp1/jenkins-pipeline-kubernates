@@ -106,7 +106,7 @@ pipeline {
                                                         if(isInteger){
                                                         nextversion= Integer.parseInt(ImageVersion )+1
                                                          }else{
-                                                        nextversion = 1
+                                                        nextversion = 0
                                                         }
 
                                           return '<input name="value" value="' +nextversion+ '" type="text" >'
