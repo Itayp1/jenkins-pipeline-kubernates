@@ -142,7 +142,33 @@ pipeline {
                                             ]
                                     ]
                             ],
+                            [$class: 'DynamicReferenceParameter',
+                                    choiceType: 'ET_FORMATTED_HTML',
+                                    omitValueField: true,
+                                    description: 'the last version of the image',
+                                    name: 'nextversionnew',
+                                    randomName: 'choice-parameter-5631314456178621',
+                                    referencedParameters: 'currentimage',
+                                    script: [
+                                            $class: 'GroovyScript',
+                                            fallbackScript: [
+                                                    classpath: [],
+                                                    sandbox: true,
+                                                    script:
+                                                            'return[\'nothing.....\']'
+                                            ],
+                                            script: [
+                                                    classpath: [],
+                                                    sandbox: true,
+                                                    script:'''
+                                                     def ver=Integer.parseInt(ImageVersion )+1
 
+                                                  return "<input name=\\"value\\" value=\\"${ver}\\" type=\\"text\\" >"
+
+                                '''
+                                            ]
+                                    ]
+                            ],
                                  [$class: 'CascadeChoiceParameter',
                                 choiceType: 'PT_SINGLE_SELECT',
                                 description: 'Select the Env Name from the Dropdown List',
