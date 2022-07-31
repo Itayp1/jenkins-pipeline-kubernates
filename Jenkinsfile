@@ -83,7 +83,7 @@ pipeline {
                                     script: [
                                         classpath: [],
                                         sandbox: true,
-                                                 script:"""
+                                        script:"""
                                         import groovy.json.JsonSlurper
                                      try {
 
@@ -109,7 +109,7 @@ pipeline {
                                                         nextversion = 1
                                                         }
 
-                                          return "<input name=\\"value\\" value=\\"${nextversion}\\" type=\\"text\\" >"
+                                          return '<input name="value" value="${nextversion}" type="text" >'
 
                                      } catch (Exception e) {
 
