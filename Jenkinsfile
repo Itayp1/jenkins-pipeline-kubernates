@@ -109,7 +109,7 @@ pipeline {
                                                         nextversion = 0
                                                         }
 
-                                                  return "<input name=\\"value\\" value=\\"${nextversion}\\" type=\\"text\\" >"
+                                                  return "<input name=\\"value\\" value=\\"${ImageVersion}\\" type=\\"text\\" >"
                                       } catch (Exception e) {
                                           return [e.toString()]
                                      }
