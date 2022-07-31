@@ -161,7 +161,7 @@ pipeline {
                                                     classpath: [],
                                                     sandbox: true,
                                                     script:'''
-                                                     def ver=Integer.parseInt(ImageVersion)+1
+                                                     def ver=Integer.parseInt(currentimage)+1
 
                                                   return "<input name=\\"value\\" value=\\"${ver}\\" type=\\"text\\" >"
 
