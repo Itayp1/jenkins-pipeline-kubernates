@@ -284,7 +284,7 @@ pipeline {
 
                     serviceDeployment = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Service.yaml")
                     serviceDeploymentChanged = serviceDeployment.text.replace('tmpServiceName', "${RepoName}")
-                    writeFile file:"${WORKSPACE}/jenkins-pipeline-kubernates/Ingress.yaml", text:serviceDeploymentChanged
+                    writeFile file:"${WORKSPACE}/jenkins-pipeline-kubernates/Service.yaml", text:serviceDeploymentChanged
 
                     // def yaml = readYaml file: 'Deployment.yaml'
 
