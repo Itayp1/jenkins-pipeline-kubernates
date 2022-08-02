@@ -280,8 +280,11 @@ pipeline {
 
                     file2 = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Ingress.yaml")
                     newConfig2 = file2.text.replace('tmpServiceName', "${RepoName}")
-
                     writeFile file:"${WORKSPACE}/jenkins-pipeline-kubernates/Ingress.yaml", text:newConfig2
+
+                    serviceDeployment = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Service.yaml")
+                    serviceDeploymentChanged = serviceDeployment.text.replace('tmpServiceName', "${RepoName}")
+                    writeFile file:"${WORKSPACE}/jenkins-pipeline-kubernates/Ingress.yaml", text:serviceDeploymentChanged
 
                     // def yaml = readYaml file: 'Deployment.yaml'
 
@@ -301,6 +304,7 @@ pipeline {
                     sh """
                     cd jenkins-pipeline-kubernates
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Deployment.yaml
+                    kubectl --kubeconfig ${KUBECONFIG}  apply -f Service.yaml
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Ingress.yaml
                     """
                 }
