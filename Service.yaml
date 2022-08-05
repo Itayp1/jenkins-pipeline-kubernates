@@ -3,6 +3,9 @@ kind: "Service"
 metadata:
   name: "tmpServiceName"
   namespace: "qa"
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9090"
 spec:
   type: "ClusterIP"
   ports:
