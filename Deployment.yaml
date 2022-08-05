@@ -2,7 +2,7 @@ apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
   name: "tmpServiceName"
-  namespace: "qa"
+  namespace: "kube-prometheus-stack"
 spec:
   replicas: 1
   selector:
