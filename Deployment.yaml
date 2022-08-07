@@ -25,9 +25,8 @@ spec:
             initialDelaySeconds: 30
             periodSeconds: 30
           env:
-            - name: "ENV"
-              value: "I WAS IN QA"
-            - name: "SQL_PORT"
-              value: "I WAS THERE"
-            - name: "SQL_SERVER"
-              value: "172.1.2.3"
+            - name: "SERVICE_NAME"
+              value: "tmpServiceName"
+          envFrom:
+            - configMapRef:
+                name: config-map

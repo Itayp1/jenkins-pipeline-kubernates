@@ -20,6 +20,10 @@ pipeline {
                                 name: 'Operation',
                                 choices: ['Build', 'Deploy']
                             ),
+                                                                        choice(
+                                name: 'ENV',
+                                choices: ['qa', 'Pprd']
+                            ),
                                [$class: 'CascadeChoiceParameter',
                                 choiceType: 'PT_MULTI_SELECT',
                                 description: 'Select the Env Name from the Dropdown List',
@@ -276,6 +280,7 @@ pipeline {
                     file = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml")
                     newConfig = file.text.replace('tmpServiceNameImage', "itayp/${RepoName}:${NextImageVersion}")
                     newConfig = newConfig.replace('tmpServiceName', "${RepoName}")
+                    newConfig = newConfig.replace('ENV_VALUE', "${ENV}")
                     writeFile file:"${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml", text:newConfig
 
                     file2 = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Ingress.yaml")
@@ -303,6 +308,7 @@ pipeline {
 
                     sh """
                     cd jenkins-pipeline-kubernates
+                    kubectl --kubeconfig ${KUBECONFIG}  apply -f qa-config-map.yaml
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Deployment.yaml
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Service.yaml
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Ingress.yaml
