@@ -22,7 +22,7 @@ pipeline {
                             ),
                                                                         choice(
                                 name: 'ENV',
-                                choices: ['qa', 'Pprd']
+                                choices: ['qa', 'prd']
                             ),
                                [$class: 'CascadeChoiceParameter',
                                 choiceType: 'PT_MULTI_SELECT',
