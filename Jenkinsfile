@@ -322,7 +322,7 @@ pipeline {
         stage('Add DNS Record') {
             steps {
                 echo 'Add DNS Record'
-                    def dnsListhttp = new URL("https://api.cloudflare.com/client/v4/zones/e613f0a60bf64d0df5e08a0274f2c948/dns_records?name=" + RepoName  ).openConnection() as HttpURLConnection
+                    def dnsListhttp = new URL('https://api.cloudflare.com/client/v4/zones/e613f0a60bf64d0df5e08a0274f2c948/dns_records?name=' + RepoName  ).openConnection() as HttpURLConnection
                     dnsListhttp.setRequestMethod('GET')
                     dnsListhttp.setDoOutput(true)
                     dnsListhttp.setRequestProperty('X-Auth-Email', 'peretz.itay@gmail.com')
@@ -337,29 +337,29 @@ pipeline {
                     def dnsRecordExist = dnsListResponse.result_info.count > 0
                     def operation = 'POST'
                     def dnsID = ''
-                     if(dnsRecordExist){
-                        operation ="PUT"
-                        dnsID= dnsListResponse.result[0].id
-                     }
+                if (dnsRecordExist) {
+                    operation = 'PUT'
+                    dnsID = dnsListResponse.result[0].id
+                }
 
                     def message = '{"type": "A","name": "hello-world-kubernates2","content":"'+ KUBERNATES_CLUSTER_IP +'","proxied": true}'
 
-                    def setDnsRecordHttp = new URL("https://api.cloudflare.com/client/v4/zones/e613f0a60bf64d0df5e08a0274f2c948/dns_records/" + dnsID + ).openConnection() as HttpURLConnection
+                    def setDnsRecordHttp = new URL('https://api.cloudflare.com/client/v4/zones/e613f0a60bf64d0df5e08a0274f2c948/dns_records/' + dnsID ).openConnection() as HttpURLConnection
                     setDnsRecordHttp.setRequestMethod(operation)
                     setDnsRecordHttp.setDoOutput(true)
                     setDnsRecordHttp.setRequestProperty('X-Auth-Email', 'peretz.itay@gmail.com')
                     setDnsRecordHttp.setRequestProperty('X-Auth-Email', X_AUTH_KEY)
-                    setDnsRecordHttp.setRequestProperty("Content-Type", "application/json")
-                    setDnsRecordHttp.getOutputStream().write(message.getBytes("UTF-8"));
+                    setDnsRecordHttp.setRequestProperty('Content-Type', 'application/json')
+                    setDnsRecordHttp.getOutputStream().write(message.getBytes('UTF-8'))
                     setDnsRecordHttp.connect()
                     def setDnsRecordHttpResponse = [:]
                     if (setDnsRecordHttp.responseCode == 200) {
-                        echo "finish add dns record"
+                    echo 'finish add dns record'
                     setDnsRecordHttpResponse = new JsonSlurper().parseText(setDnsRecordHttp.inputStream.getText('UTF-8'))
                     } else {
                     setDnsRecordHttpResponse = new JsonSlurper().parseText(setDnsRecordHttp.errorStream.getText('UTF-8'))
                     println(setDnsRecordHttpResponse)
-                            throw new Exception("could not update dns record")
+                    throw new Exception('could not update dns record')
                     }
             }
         }
