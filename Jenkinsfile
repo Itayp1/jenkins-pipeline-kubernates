@@ -38,14 +38,14 @@ pipeline {
                                     $class: 'GroovyScript',
                                     fallbackScript: [
                                         classpath: [],
-                                        sandbox: true,
+                                        sandbox: false,
                                         script:"""
                                             return[\'Could not get Env\']
                                             """
                                     ],
                                     script: [
                                         classpath: [],
-                                        sandbox: true,
+                                        sandbox: false,
                                         script:"""
                                         import groovy.json.JsonSlurper
                                      try {
@@ -82,14 +82,14 @@ pipeline {
                                     $class: 'GroovyScript',
                                     fallbackScript: [
                                         classpath: [],
-                                        sandbox: true,
+                                        sandbox: false,
                                         script:"""
                                             return[\'Could not get Env\']
                                             """
                                     ],
                                     script: [
                                         classpath: [],
-                                        sandbox: true,
+                                        sandbox: false,
                                         script:"""
                                         import groovy.json.JsonSlurper
                                      try {
@@ -137,13 +137,13 @@ pipeline {
                                             $class: 'GroovyScript',
                                             fallbackScript: [
                                                     classpath: [],
-                                                    sandbox: true,
+                                                    sandbox: false,
                                                     script:
                                                             'return[\'nothing.....\']'
                                             ],
                                             script: [
                                                     classpath: [],
-                                                    sandbox: true,
+                                                    sandbox: false,
                                                     script:'''
                                                        return "<b>${currentimage}<b>"
 
@@ -162,13 +162,13 @@ pipeline {
                                             $class: 'GroovyScript',
                                             fallbackScript: [
                                                     classpath: [],
-                                                    sandbox: true,
+                                                    sandbox: false,
                                                     script:
                                                             'return[\'nothing.....\']'
                                             ],
                                             script: [
                                                     classpath: [],
-                                                    sandbox: true,
+                                                    sandbox: false,
                                                     script:'''
                                                      def ver=Integer.parseInt(currentimage)+1
 
@@ -190,14 +190,14 @@ pipeline {
                                     $class: 'GroovyScript',
                                     fallbackScript: [
                                         classpath: [],
-                                        sandbox: true,
+                                        sandbox: false,
                                         script:"""
                                             return[\'Could not get Env\']
                                             """
                                     ],
                                     script: [
                                         classpath: [],
-                                        sandbox: true,
+                                        sandbox: false,
                                        script:"""
                                         import groovy.json.JsonSlurper
                                      try {
@@ -344,8 +344,15 @@ pipeline {
                         operation = 'PUT'
                         dnsID = dnsListResponse.result[0].id
                         }
+                        def dnsRecord = ''
 
-                        def message = '{"type": "A","name": "'+RepoName+'","content":"'+ KUBERNATES_CLUSTER_IP +'","proxied": true}'
+                        if (ENV != 'prd') {
+                        dnsRecord = "${RepoName}-${ENV}"
+                        }else {
+                        dnsRecord = RepoName
+                        }
+
+                        def message = '{"type": "A","name": "'+dnsRecord+'","content":"'+ KUBERNATES_CLUSTER_IP +'","proxied": true}'
 
                         def setDnsRecordHttp = new URL('https://api.cloudflare.com/client/v4/zones/e613f0a60bf64d0df5e08a0274f2c948/dns_records/' + dnsID ).openConnection() as HttpURLConnection
                         setDnsRecordHttp.setRequestMethod(operation)
