@@ -328,7 +328,7 @@ pipeline {
                         dnsListhttp.setRequestMethod('GET')
                         dnsListhttp.setDoOutput(true)
                         dnsListhttp.setRequestProperty('X-Auth-Email', 'peretz.itay@gmail.com')
-                        dnsListhttp.setRequestProperty('X-Auth-Email', X_AUTH_KEY)
+                        dnsListhttp.setRequestProperty('X-Auth-Key', X_AUTH_KEY)
                         dnsListhttp.connect()
                         def dnsListResponse = [:]
                         if (dnsListhttp.responseCode == 200) {
@@ -351,7 +351,7 @@ pipeline {
                         setDnsRecordHttp.setRequestMethod(operation)
                         setDnsRecordHttp.setDoOutput(true)
                         setDnsRecordHttp.setRequestProperty('X-Auth-Email', 'peretz.itay@gmail.com')
-                        setDnsRecordHttp.setRequestProperty('X-Auth-Email', X_AUTH_KEY)
+                        setDnsRecordHttp.setRequestProperty('X-Auth-Key', X_AUTH_KEY)
                         setDnsRecordHttp.setRequestProperty('Content-Type', 'application/json')
                         setDnsRecordHttp.getOutputStream().write(message.getBytes('UTF-8'))
                         setDnsRecordHttp.connect()
