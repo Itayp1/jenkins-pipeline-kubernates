@@ -336,6 +336,7 @@ pipeline {
                         } else {
                         dnsListResponse = new JsonSlurper().parseText(dnsListhttp.errorStream.getText('UTF-8'))
                         }
+                        println(dnsListResponse)
                         def dnsRecordExist = dnsListResponse.result_info.count > 0
                         def operation = 'POST'
                         def dnsID = ''
