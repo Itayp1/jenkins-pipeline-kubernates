@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 /* groovylint-disable LineLength */
 /* groovylint-disable-next-line CompileStatic */
+import groovy.json.JsonSlurper
 
 pipeline {
     agent any
@@ -322,7 +323,6 @@ pipeline {
         stage('Add DNS Record') {
             steps {
                 echo 'Add DNS Record'
-                    import groovy.json.JsonSlurper
                     def dnsListhttp = new URL('https://api.cloudflare.com/client/v4/zones/e613f0a60bf64d0df5e08a0274f2c948/dns_records?name=' + RepoName  ).openConnection() as HttpURLConnection
                     dnsListhttp.setRequestMethod('GET')
                     dnsListhttp.setDoOutput(true)
