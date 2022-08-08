@@ -324,7 +324,7 @@ pipeline {
             steps {
                 script {
                         echo 'Add/update DNS Record'
-                        def dnsListhttp = new URL('https://api.cloudflare.com/client/v4/zones/e613f0a60bf64d0df5e08a0274f2c948/dns_records?name=' + RepoName  ).openConnection() as HttpURLConnection
+                        def dnsListhttp = new URL('https://api.cloudflare.com/client/v4/zones/e613f0a60bf64d0df5e08a0274f2c948/dns_records?name=' + RepoName + '.digital-cloud-services.com'  ).openConnection() as HttpURLConnection
                         dnsListhttp.setRequestMethod('GET')
                         dnsListhttp.setDoOutput(true)
                         dnsListhttp.setRequestProperty('X-Auth-Email', 'peretz.itay@gmail.com')
@@ -344,7 +344,7 @@ pipeline {
                         dnsID = dnsListResponse.result[0].id
                         }
 
-                        def message = '{"type": "A","name": "hello-world-kubernates2","content":"'+ KUBERNATES_CLUSTER_IP +'","proxied": true}'
+                        def message = '{"type": "A","name": "'+RepoName+'","content":"'+ KUBERNATES_CLUSTER_IP +'","proxied": true}'
 
                         def setDnsRecordHttp = new URL('https://api.cloudflare.com/client/v4/zones/e613f0a60bf64d0df5e08a0274f2c948/dns_records/' + dnsID ).openConnection() as HttpURLConnection
                         setDnsRecordHttp.setRequestMethod(operation)
