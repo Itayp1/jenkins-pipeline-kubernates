@@ -79,7 +79,7 @@ pipeline {
                                 filterable: true,
                                 name: 'currentimage',
                                 randomName: 'choice-parameter-1231314439613946',
-                                referencedParameters: 'RepoName',
+                                referencedParameters: 'RepoName,OPERATION',
                                 script: [
                                     $class: 'GroovyScript',
                                     fallbackScript: [
@@ -134,7 +134,7 @@ pipeline {
                                     description: 'show the last version of the image',
                                     name: 'NextImageVersion',
                                     randomName: 'choice-parameter-5631314456178621',
-                                    referencedParameters: 'currentimage, RepoName',
+                                    referencedParameters: 'currentimage, RepoName , OPERATION',
                                     script: [
                                             $class: 'GroovyScript',
                                             fallbackScript: [
@@ -147,7 +147,13 @@ pipeline {
                                                     classpath: [],
                                                     sandbox: true,
                                                     script:'''
-                                                     def nextVer=Integer.parseInt(currentimage)+1
+                                                     def nextVer = ""
+                                                    if(OPERATION =="Deploy"){
+                                                        nextVer=Integer.parseInt(currentimage)
+                                                    }else{
+                                                        nextVer=Integer.parseInt(currentimage)+1
+
+                                                    }
 
                                                          return '<input name="value" value="' +nextVer+ '" type="text" >'
 
