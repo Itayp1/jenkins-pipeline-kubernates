@@ -19,17 +19,10 @@ pipeline {
                     properties([
 
                         parameters([
-                                            choice(
-                                name: 'Operation',
-                                choices: ['Build', 'Deploy']
-                            ),
-                                                                        choice(
-                                name: 'ENV',
-                                choices: ['qa', 'prd']
-                            ),
+
                                [$class: 'CascadeChoiceParameter',
                                 choiceType: 'PT_MULTI_SELECT',
-                                description: 'Select the Env Name from the Dropdown List',
+                                description: 'Select the Repo Name from the Dropdown List',
                                 filterLength: 1,
                                 filterable: true,
                                 name: 'RepoName',
@@ -70,9 +63,18 @@ pipeline {
                                     ]
                                 ]
                     ],
+
+                                                                choice(
+                                name: 'Operation',
+                                choices: ['Build', 'Deploy']
+                            ),
+                            choice(
+                                name: 'ENV',
+                                choices: ['qa', 'prd']
+                            ),
                          [$class: 'DynamicReferenceParameter',
                                 choiceType: 'ET_FORMATTED_HIDDEN_HTML',
-                                description: 'Select the Env Name from the Dropdown List',
+                                description: 'get the last version from artifactory',
                                 filterLength: 1,
                                 filterable: true,
                                 name: 'currentimage',
@@ -127,9 +129,9 @@ pipeline {
                                 ]
                     ],
                             [$class: 'DynamicReferenceParameter',
-                                    choiceType: 'ET_FORMATTED_HTML',
+                                    choiceType: 'ET_FORMATTED_HIDDEN_HTML',
                                     omitValueField: true,
-                                    description: 'the last version of the image',
+                                    description: 'show the last version of the image',
                                     name: 'ImageVersion',
                                     randomName: 'choice-parameter-5631314456178621',
                                     referencedParameters: 'RepoName, currentimage',
@@ -145,7 +147,8 @@ pipeline {
                                                     classpath: [],
                                                     sandbox: false,
                                                     script:'''
-                                                       return "<b>${currentimage}<b>"
+
+                                                         return '<input name="value" value="' +currentimage+ '" type="text" >'
 
                                 '''
                                             ]
@@ -154,7 +157,7 @@ pipeline {
                             [$class: 'DynamicReferenceParameter',
                                     choiceType: 'ET_FORMATTED_HTML',
                                     omitValueField: true,
-                                    description: 'the last version of the image',
+                                    description: 'the next version of the image',
                                     name: 'nextversionnew',
                                     randomName: 'choice-parameter-5631314456178141',
                                     referencedParameters: 'RepoName,currentimage',
@@ -171,67 +174,37 @@ pipeline {
                                                     sandbox: false,
                                                     script:'''
                                                      def ver=Integer.parseInt(currentimage)+1
-
-                                                  return "<input name=\\"value\\" value=\\"${ver}\\" type=\\"text\\" >"
-
+                                                  return "<p>$ver<p>"
                                 '''
                                             ]
                                     ]
                             ],
-                                 [$class: 'CascadeChoiceParameter',
-                                choiceType: 'PT_SINGLE_SELECT',
-                                description: 'Select the Env Name from the Dropdown List',
-                                filterLength: 1,
-                                filterable: true,
-                                name: 'NextImageVersion',
-                                randomName: 'choice-parameter-5631314439613946',
-                                referencedParameters: 'RepoName',
-                                script: [
-                                    $class: 'GroovyScript',
-                                    fallbackScript: [
-                                        classpath: [],
-                                        sandbox: false,
-                                        script:"""
-                                            return[\'Could not get Env\']
-                                            """
-                                    ],
+                            [$class: 'DynamicReferenceParameter',
+                                    choiceType: 'ET_FORMATTED_HIDDEN_HTML',
+                                    omitValueField: true,
+                                    description: 'show the last version of the image',
+                                    name: 'NextImageVersion',
+                                    randomName: 'choice-parameter-3481314456178621',
+                                    referencedParameters: 'currentimage',
                                     script: [
-                                        classpath: [],
-                                        sandbox: false,
-                                       script:"""
-                                        import groovy.json.JsonSlurper
-                                     try {
+                                            $class: 'GroovyScript',
+                                            fallbackScript: [
+                                                    classpath: [],
+                                                    sandbox: false,
+                                                    script:
+                                                            'return[\'nothing.....\']'
+                                            ],
+                                            script: [
+                                                    classpath: [],
+                                                    sandbox: false,
+                                                    script:'''
+                                              def nextver= currentimage.toString().isInteger() + 1
+                                                         return '<input name="value" value="' +nextver+ '" type="text" >'
 
-                                                                def http = new URL("https://hub.docker.com/v2/repositories/itayp/"+RepoName+"/tags?page_size=100").openConnection() as HttpURLConnection
-                                                                http.setRequestMethod('GET')
-                                                                http.setDoOutput(true)
-                                                                http.setRequestProperty('Authorization', 'JWT ${DOCKER_HUB_TOKEN}')
-                                                                http.connect()
-                                                                def response = [:]
-                                                                if (http.responseCode == 200) {
-                                                                    response = new JsonSlurper().parseText(http.inputStream.getText('UTF-8'))
-                                                                } else {
-                                                                    response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
-                                                                }
-                                                            def resArr = []
-                                                            response.results.each { resArr.push(it.name) }
-                                        def ImageVersion = resArr[0]
-                                          def nextversion
-                                                        def isInteger= ImageVersion.toString().isInteger()
-                                                        if(isInteger){
-                                                        nextversion= Integer.parseInt(ImageVersion )+1
-                                                         }else{
-                                                        nextversion = 1
-                                                        }
-
-                                        return [nextversion]
-                                     } catch (Exception e) {
-                                          return [e.toString()]
-                                     }
-                                            """
+                                '''
+                                            ]
                                     ]
-                                ]
-                    ]
+                            ]
 
                                     ])
                     ])
