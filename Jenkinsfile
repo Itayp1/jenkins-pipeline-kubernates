@@ -64,7 +64,7 @@ pipeline {
                                 ]
                     ],
 
-                                                                choice(
+                             choice(
                                 name: 'Operation',
                                 choices: ['Build', 'Deploy']
                             ),
