@@ -306,8 +306,15 @@ pipeline {
         stage('Add DNS Record') {
             steps {
                 script {
-                        echo 'Add/update DNS Record'
-                        def dnsListhttp = new URL('https://api.cloudflare.com/client/v4/zones/e613f0a60bf64d0df5e08a0274f2c948/dns_records?name=' + RepoName + '.digital-cloud-services.com'  ).openConnection() as HttpURLConnection
+                        echo 'Add DNS Record'
+                    def dnsRecord = ''
+                        if (ENV != 'prd') {
+                        dnsRecord = "${RepoName}-${ENV}"
+                        }else {
+                        dnsRecord = RepoName
+                        }
+
+                        def dnsListhttp = new URL('https://api.cloudflare.com/client/v4/zones/e613f0a60bf64d0df5e08a0274f2c948/dns_records?name=' + dnsRecord + '.digital-cloud-services.com'  ).openConnection() as HttpURLConnection
                         dnsListhttp.setRequestMethod('GET')
                         dnsListhttp.setDoOutput(true)
                         dnsListhttp.setRequestProperty('X-Auth-Email', 'peretz.itay@gmail.com')
@@ -321,24 +328,18 @@ pipeline {
                         }
                         println(dnsListResponse)
                         def dnsRecordExist = dnsListResponse.result_info.count > 0
-                        def operation = 'POST'
-                        def dnsID = ''
-                        if (dnsRecordExist) {
-                        operation = 'PUT'
-                        dnsID = dnsListResponse.result[0].id
-                        }
-                        def dnsRecord = ''
 
-                        if (ENV != 'prd') {
-                        dnsRecord = "${RepoName}-${ENV}"
-                        }else {
-                        dnsRecord = RepoName
+                        if (dnsRecordExist) {
+                        echo 'the dns record already exist do nothing'
+                        return
+                            }else {
+                        echo 'create new dns'
                         }
 
                         def message = '{"type": "A","name": "'+dnsRecord+'","content":"'+ KUBERNATES_CLUSTER_IP +'","proxied": true}'
 
-                        def setDnsRecordHttp = new URL('https://api.cloudflare.com/client/v4/zones/e613f0a60bf64d0df5e08a0274f2c948/dns_records/' + dnsID ).openConnection() as HttpURLConnection
-                        setDnsRecordHttp.setRequestMethod(operation)
+                        def setDnsRecordHttp = new URL('https://api.cloudflare.com/client/v4/zones/e613f0a60bf64d0df5e08a0274f2c948/dns_records'  ).openConnection() as HttpURLConnection
+                        setDnsRecordHttp.setRequestMethod('POST')
                         setDnsRecordHttp.setDoOutput(true)
                         setDnsRecordHttp.setRequestProperty('X-Auth-Email', 'peretz.itay@gmail.com')
                         setDnsRecordHttp.setRequestProperty('X-Auth-Key', X_AUTH_KEY)
