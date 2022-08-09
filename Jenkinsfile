@@ -184,7 +184,7 @@ pipeline {
                                     omitValueField: true,
                                     description: 'the next version of the image',
                                     name: 'currentImageVersionHtml',
-                                    randomName: 'choice-parameter-5631314456178141',
+                                    randomName: 'choice-parameter-5631317286178141',
                                     referencedParameters: 'currentimage',
                                     script: [
                                             $class: 'GroovyScript',
