@@ -216,10 +216,10 @@ pipeline {
         }
 
         stage('Clone') {
-            steps {
-                when {
+            when {
                     expression { params.OPERATION == 'Build' }
-                }
+            }
+            steps {
                 echo 'Cloning The Repo..'
                 sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/${RepoName}.git"
                 sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
