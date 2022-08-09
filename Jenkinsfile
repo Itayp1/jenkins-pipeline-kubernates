@@ -134,7 +134,7 @@ pipeline {
                                     description: 'show the last version of the image',
                                     name: 'NextImageVersion',
                                     randomName: 'choice-parameter-5631314456178621',
-                                    referencedParameters: 'currentimage',
+                                    referencedParameters: 'currentimage, RepoName',
                                     script: [
                                             $class: 'GroovyScript',
                                             fallbackScript: [
