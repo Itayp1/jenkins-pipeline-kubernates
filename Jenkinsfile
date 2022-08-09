@@ -132,59 +132,8 @@ pipeline {
                                     choiceType: 'ET_FORMATTED_HIDDEN_HTML',
                                     omitValueField: true,
                                     description: 'show the last version of the image',
-                                    name: 'ImageVersion',
-                                    randomName: 'choice-parameter-5631314456178621',
-                                    referencedParameters: 'RepoName, currentimage',
-                                    script: [
-                                            $class: 'GroovyScript',
-                                            fallbackScript: [
-                                                    classpath: [],
-                                                    sandbox: false,
-                                                    script:
-                                                            'return[\'nothing.....\']'
-                                            ],
-                                            script: [
-                                                    classpath: [],
-                                                    sandbox: false,
-                                                    script:'''
-
-                                                         return '<input name="value" value="' +currentimage+ '" type="text" >'
-
-                                '''
-                                            ]
-                                    ]
-                            ],
-                            [$class: 'DynamicReferenceParameter',
-                                    choiceType: 'ET_FORMATTED_HTML',
-                                    omitValueField: true,
-                                    description: 'the next version of the image',
-                                    name: 'nextversionnew',
-                                    randomName: 'choice-parameter-5631314456178141',
-                                    referencedParameters: 'RepoName,currentimage',
-                                    script: [
-                                            $class: 'GroovyScript',
-                                            fallbackScript: [
-                                                    classpath: [],
-                                                    sandbox: false,
-                                                    script:
-                                                            'return[\'nothing.....\']'
-                                            ],
-                                            script: [
-                                                    classpath: [],
-                                                    sandbox: false,
-                                                    script:'''
-                                                     def ver=Integer.parseInt(currentimage)+1
-                                                  return "<p>$ver<p>"
-                                '''
-                                            ]
-                                    ]
-                            ],
-                            [$class: 'DynamicReferenceParameter',
-                                    choiceType: 'ET_FORMATTED_HIDDEN_HTML',
-                                    omitValueField: true,
-                                    description: 'show the last version of the image',
                                     name: 'NextImageVersion',
-                                    randomName: 'choice-parameter-3481314456178621',
+                                    randomName: 'choice-parameter-5631314456178621',
                                     referencedParameters: 'currentimage',
                                     script: [
                                             $class: 'GroovyScript',
@@ -198,14 +147,62 @@ pipeline {
                                                     classpath: [],
                                                     sandbox: false,
                                                     script:'''
-                                              def nextver= currentimage.toString().isInteger() + 1
-                                                         return '<input name="value" value="' +nextver+ '" type="text" >'
+                                                     def nextVer=Integer.parseInt(currentimage)+1
+
+                                                         return '<input name="value" value="' +nextVer+ '" type="text" >'
 
                                 '''
                                             ]
                                     ]
+                            ],
+                            [$class: 'DynamicReferenceParameter',
+                                    choiceType: 'ET_FORMATTED_HTML',
+                                    omitValueField: true,
+                                    description: 'the next version of the image',
+                                    name: 'NextImageVersionHtml',
+                                    randomName: 'choice-parameter-5631314456178141',
+                                    referencedParameters: 'NextImageVersion',
+                                    script: [
+                                            $class: 'GroovyScript',
+                                            fallbackScript: [
+                                                    classpath: [],
+                                                    sandbox: false,
+                                                    script:
+                                                            'return[\'nothing.....\']'
+                                            ],
+                                            script: [
+                                                    classpath: [],
+                                                    sandbox: false,
+                                                    script:'''
+                                                  return "<p>$NextImageVersion<p>"
+                                '''
+                                            ]
+                                    ]
+                            ],
+                            [$class: 'DynamicReferenceParameter',
+                                    choiceType: 'ET_FORMATTED_HTML',
+                                    omitValueField: true,
+                                    description: 'the next version of the image',
+                                    name: 'currentImageVersionHtml',
+                                    randomName: 'choice-parameter-5631314456178141',
+                                    referencedParameters: 'currentimage',
+                                    script: [
+                                            $class: 'GroovyScript',
+                                            fallbackScript: [
+                                                    classpath: [],
+                                                    sandbox: false,
+                                                    script:
+                                                            'return[\'nothing.....\']'
+                                            ],
+                                            script: [
+                                                    classpath: [],
+                                                    sandbox: false,
+                                                    script:'''
+                                                  return "<p>$currentimage<p>"
+                                '''
+                                            ]
+                                    ]
                             ]
-
                                     ])
                     ])
                 }
