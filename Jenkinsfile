@@ -31,14 +31,14 @@ pipeline {
                                     $class: 'GroovyScript',
                                     fallbackScript: [
                                         classpath: [],
-                                        sandbox: false,
+                                        sandbox: true,
                                         script:"""
                                             return[\'Could not get Env\']
                                             """
                                     ],
                                     script: [
                                         classpath: [],
-                                        sandbox: false,
+                                        sandbox: true,
                                         script:"""
                                         import groovy.json.JsonSlurper
                                      try {
@@ -84,14 +84,14 @@ pipeline {
                                     $class: 'GroovyScript',
                                     fallbackScript: [
                                         classpath: [],
-                                        sandbox: false,
+                                        sandbox: true,
                                         script:"""
                                             return[\'Could not get Env\']
                                             """
                                     ],
                                     script: [
                                         classpath: [],
-                                        sandbox: false,
+                                        sandbox: true,
                                         script:"""
                                         import groovy.json.JsonSlurper
                                      try {
@@ -139,13 +139,13 @@ pipeline {
                                             $class: 'GroovyScript',
                                             fallbackScript: [
                                                     classpath: [],
-                                                    sandbox: false,
+                                                    sandbox: true,
                                                     script:
                                                             'return[\'nothing.....\']'
                                             ],
                                             script: [
                                                     classpath: [],
-                                                    sandbox: false,
+                                                    sandbox: true,
                                                     script:'''
                                                      def nextVer=Integer.parseInt(currentimage)+1
 
@@ -166,13 +166,13 @@ pipeline {
                                             $class: 'GroovyScript',
                                             fallbackScript: [
                                                     classpath: [],
-                                                    sandbox: false,
+                                                    sandbox: true,
                                                     script:
                                                             'return[\'nothing.....\']'
                                             ],
                                             script: [
                                                     classpath: [],
-                                                    sandbox: false,
+                                                    sandbox: true,
                                                     script:'''
                                                   return "<p>$NextImageVersion<p>"
                                 '''
@@ -190,13 +190,13 @@ pipeline {
                                             $class: 'GroovyScript',
                                             fallbackScript: [
                                                     classpath: [],
-                                                    sandbox: false,
+                                                    sandbox: true,
                                                     script:
                                                             'return[\'nothing.....\']'
                                             ],
                                             script: [
                                                     classpath: [],
-                                                    sandbox: false,
+                                                    sandbox: true,
                                                     script:'''
                                                   return "<p>$currentimage<p>"
                                 '''
