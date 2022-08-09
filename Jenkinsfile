@@ -161,7 +161,7 @@ pipeline {
                                     description: 'the next version of the image',
                                     name: 'NextImageVersionHtml',
                                     randomName: 'choice-parameter-5631314456178141',
-                                    referencedParameters: 'NextImageVersion',
+                                    referencedParameters: 'NextImageVersion,RepoName',
                                     script: [
                                             $class: 'GroovyScript',
                                             fallbackScript: [
@@ -185,7 +185,7 @@ pipeline {
                                     description: 'the next version of the image',
                                     name: 'currentImageVersionHtml',
                                     randomName: 'choice-parameter-5631317286178141',
-                                    referencedParameters: 'currentimage',
+                                    referencedParameters: 'currentimage,RepoName',
                                     script: [
                                             $class: 'GroovyScript',
                                             fallbackScript: [
