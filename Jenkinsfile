@@ -215,14 +215,13 @@ pipeline {
             }
         }
 
-        stage('Clone') {
+        stage('Clone Repo') {
             when {
                     expression { params.OPERATION == 'Build' }
             }
             steps {
                 echo 'Cloning The Repo..'
                 sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/${RepoName}.git"
-                sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
 
                 echo "params:${params}"
                 echo "env:${env}"
@@ -263,6 +262,8 @@ pipeline {
             steps {
                 script {
                     echo 'Deploying....'
+                    sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
+
                     file = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml")
                     newConfig = file.text.replace('tmpServiceNameImage', "itayp/${RepoName}:${NextImageVersion}")
                     newConfig = newConfig.replace('tmpServiceName', "${RepoName}")
