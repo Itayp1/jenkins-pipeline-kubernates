@@ -65,7 +65,7 @@ pipeline {
                     ],
 
                              choice(
-                                name: 'Operation',
+                                name: 'OPERATION',
                                 choices: ['Build', 'Deploy']
                             ),
                             choice(
@@ -209,10 +209,17 @@ pipeline {
             }
         }
 
-        stage('Clone') {
+        stage('Clean WorkSpace') {
             steps {
                 cleanWs()
+            }
+        }
 
+        stage('Clone') {
+            steps {
+                when {
+                    expression { params.OPERATION == 'Build' }
+                }
                 echo 'Cloning The Repo..'
                 sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/${RepoName}.git"
                 sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
@@ -223,6 +230,9 @@ pipeline {
         }
 
         stage('Build') {
+                when {
+                    expression { params.OPERATION == 'Build' }
+                }
             steps {
                 echo 'Building..'
                 sh """
@@ -236,6 +246,9 @@ pipeline {
             }
         }
         stage('Upload Image To Artifactory') {
+                when {
+                    expression { params.OPERATION == 'Build' }
+                }
             steps {
                 echo 'Upload Image To Artifactory..'
                 sh """
