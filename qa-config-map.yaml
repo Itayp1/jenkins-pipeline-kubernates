@@ -1,18 +1,11 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: config-map
+  name: example1-config-map
   namespace: "qa"
 
 data:
   # Configuration values can be set as key-value properties
   ENV: "qa"
-  ELASTIC_ADDRESS: "http://185.253.73.11:9200"
-  ELASTIC_USERNAME: "admin"
-  ELASTIC_PASSWORD: "5197436551974365Aa"
   PORT: "3000"
-  MINIO_ENDPOINT: "minio.minio.svc.cluster.local"
-  MINIO_ACCESSKEY: "popopo1234"
-  MINIO_SECRETKEY: "popopo1234"
-  MINIO_PORT: "9000"
-  useSSL: "false"
+  KUBE_ENV_TEST: "TEST_NUM_2"

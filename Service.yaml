@@ -1,7 +1,7 @@
 apiVersion: "v1"
 kind: "Service"
 metadata:
-  name: "tmpServiceName"
+  name: "example1"
   namespace: "qa"
   annotations:
     prometheus.io/scrape: "true"
@@ -12,4 +12,4 @@ spec:
     - port: 443
       targetPort: 3000
   selector:
-    app: "tmpServiceName"
+    app: "example1"

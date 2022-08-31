@@ -1,19 +1,19 @@
 apiVersion: "networking.k8s.io/v1"
 kind: "Ingress"
 metadata:
-  name: "tmpServiceName"
+  name: "example1"
   namespace: "qa"
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    - host: "tmpServiceName-qa.digital-cloud-services.com"
+    - host: "example1-qa.digital-cloud-services.com"
       http:
         paths:
           - pathType: "Prefix"
             path: "/"
             backend:
               service:
-                name: "tmpServiceName"
+                name: "example1"
                 port:
                   number: 443

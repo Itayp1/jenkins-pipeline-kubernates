@@ -1,21 +1,21 @@
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "tmpServiceName"
+  name: "example1"
   namespace: "qa"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "tmpServiceName"
+      app: "example1"
   template:
     metadata:
       labels:
-        app: "tmpServiceName"
+        app: "example1"
     spec:
       containers:
-        - name: "tmpServiceName"
-          image: "tmpServiceNameImage"
+        - name: "example1"
+          image: "itayp/example1:1.0.0"
           ports:
             - containerPort: 3000
           livenessProbe:
@@ -26,7 +26,7 @@ spec:
             periodSeconds: 30
           env:
             - name: "SERVICE_NAME"
-              value: "tmpServiceName"
+              value: "example1"
           envFrom:
             - configMapRef:
-                name: config-map
+                name: example1-config-map
