@@ -1,7 +1,7 @@
 apiVersion: "networking.k8s.io/v1"
 kind: "Ingress"
 metadata:
-  name: "example1"
+  name: "example1-ingress"
   namespace: "qa"
   annotations:
     kubernetes.io/ingress.class: "nginx"
@@ -14,6 +14,6 @@ spec:
             path: "/"
             backend:
               service:
-                name: "example1"
+                name: "example1-service"
                 port:
                   number: 443

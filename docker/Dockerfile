@@ -16,14 +16,14 @@ RUN npm install
 COPY . .
 
 EXPOSE 3000
-CMD [ "node", "hello-world.js" ]
+CMD [ "node", "server.js" ]
 
 
-# docker build -t itayp/example1:1.0.11 .
-# docker push itayp/example1:1.0.11
-# kubectl get services -n ingress-nginx
+#   docker build -t itayp/example1:1.0.13 . && docker push itayp/example1:1.0.13
 #   kubectl apply -f .
 #   kubectl describe ingress example1 -n qa
 #   kubectl describe service example1 -n qa
 #   kubectl describe deployment example1 -n qa
- 
+#   kubectl config set-context kubernetes-lk3c5c --namespace qa
+
+

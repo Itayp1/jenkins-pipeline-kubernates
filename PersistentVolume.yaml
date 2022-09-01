@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: example1
+  name: example1-volume-claim
   namespace: "qa"
 spec:
   accessModes:
