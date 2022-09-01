@@ -13,9 +13,13 @@ spec:
       labels:
         app: "example1"
     spec:
+      volumes:
+        - name: example1
+          persistentVolumeClaim:
+            claimName: example1
       containers:
         - name: "example1"
-          image: "itayp/example1:1.0.0"
+          image: "itayp/example1:1.0.11"
           ports:
             - containerPort: 3000
           livenessProbe:
@@ -30,3 +34,6 @@ spec:
           envFrom:
             - configMapRef:
                 name: example1-config-map
+          volumeMounts:
+            - name: example1
+              mountPath: /var/storage

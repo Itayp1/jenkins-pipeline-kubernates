@@ -9,3 +9,4 @@ data:
   ENV: "qa"
   PORT: "3000"
   KUBE_ENV_TEST: "TEST_NUM_2"
+  MOUNT_PATH: /var/storage
