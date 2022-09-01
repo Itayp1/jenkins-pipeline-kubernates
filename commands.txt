@@ -1,0 +1,24 @@
+
+
+docker build -t itayp/example:1.0.18 . 
+docker push itayp/example:1.0.18
+
+kubectl apply -f .
+
+kubectl describe ingress example -n qa
+kubectl describe service example -n qa
+kubectl describe deployment example -n qa
+
+ 
+
+show details abount the usage and scaling of the deployment pods 
+kubectl get hpa example --watch
+
+change default namespace 
+kubectl config set-context {cluster-name} --namespace qa
+
+connect into a pod 
+kubectl exec -it  --tty  {podname} bash
+
+invoke service from crl <pod 2 pod example>
+curl --location --request GET 'http://example-service/health'

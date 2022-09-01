@@ -1,25 +1,25 @@
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "example1"
+  name: "example2"
   namespace: "qa"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "example1-deployment"
+      app: "example2-deployment"
   template:
     metadata:
       labels:
-        app: "example1-deployment"
+        app: "example2-deployment"
     spec:
       volumes:
-        - name: example1-volume
+        - name: example-volume
           persistentVolumeClaim:
-            claimName: example1-volume-claim
+            claimName: example-volume-claim
       containers:
-        - name: "example1"
-          image: "itayp/example1:1.0.13"
+        - name: "example"
+          image: "itayp/example:1.0.13"
           ports:
             - containerPort: 3000
           livenessProbe:
@@ -30,12 +30,12 @@ spec:
             periodSeconds: 30
           env:
             - name: "SERVICE_NAME"
-              value: "example1"
+              value: "example2"
           envFrom:
             - configMapRef:
-                name: example1-config-map
+                name: example-config-map
             - secretRef:
-                name: example1-secret
+                name: example-secret
           volumeMounts:
-            - name: example1-volume
+            - name: example-volume
               mountPath: /var/storage

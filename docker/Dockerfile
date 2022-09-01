@@ -5,25 +5,14 @@ WORKDIR /usr/src/app
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
 COPY package*.json ./
 
 RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
 
 # Bundle app source
 COPY . .
 
 EXPOSE 3000
 CMD [ "node", "server.js" ]
-
-
-#   docker build -t itayp/example1:1.0.13 . && docker push itayp/example1:1.0.13
-#   kubectl apply -f .
-#   kubectl describe ingress example1 -n qa
-#   kubectl describe service example1 -n qa
-#   kubectl describe deployment example1 -n qa
-#   kubectl config set-context kubernetes-lk3c5c --namespace qa
 
 
