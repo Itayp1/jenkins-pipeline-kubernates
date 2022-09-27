@@ -97,7 +97,7 @@ pipeline {
                                         script:"""
                                         import groovy.json.JsonSlurper
                                      try {
-                        def message = '{"password": "'+DOCKERHUB_PASSWORD+'","username":"'+ DOCKERHUB_USER +'"}'
+                        def message = '{"password": "+DOCKERHUB_PASSWORD+","username":"+ DOCKERHUB_USER +"}'
 
                         def setDnsRecordHttp = new URL('https://hub.docker.com//v2/users/login'  ).openConnection() as HttpURLConnection
                         setDnsRecordHttp.setRequestMethod('POST')
