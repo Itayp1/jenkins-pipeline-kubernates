@@ -10,6 +10,8 @@ pipeline {
         DOCKER_HUB_TOKEN = credentials('DOCKER_HUB_TOKEN')
         KUBECONFIG = credentials('KUBECONFIG')
         X_AUTH_KEY = credentials('X_AUTH_KEY')
+        DOCKERHUB_USER = credentials('DOCKERHUB_USER')
+        DOCKERHUB_PASSWORD = credentials('DOCKERHUB_PASSWORD')
         KUBERNATES_CLUSTER_IP = credentials('KUBERNATES_CLUSTER_IP')
     }
     stages {
@@ -95,11 +97,22 @@ pipeline {
                                         script:"""
                                         import groovy.json.JsonSlurper
                                      try {
+                        def message = '{"password": "'+DOCKERHUB_PASSWORD+'","username":"'+ DOCKERHUB_USER +'"}'
+
+                        def setDnsRecordHttp = new URL('https://hub.docker.com//v2/users/login'  ).openConnection() as HttpURLConnection
+                        setDnsRecordHttp.setRequestMethod('POST')
+                        setDnsRecordHttp.setDoOutput(true)
+                        setDnsRecordHttp.setRequestProperty('Content-Type', 'application/json')
+                        setDnsRecordHttp.getOutputStream().write(message.getBytes('UTF-8'))
+                        setDnsRecordHttp.connect()
+                        def setDnsRecordHttpResponse = [:]
+                         setDnsRecordHttpResponse = new JsonSlurper().parseText(setDnsRecordHttp.inputStream.getText('UTF-8'))
+                         def tmpToken = setDnsRecordHttpResponse.token
 
                                                                 def http = new URL("https://hub.docker.com/v2/repositories/itayp/"+RepoName+"/tags?page_size=100").openConnection() as HttpURLConnection
                                                                 http.setRequestMethod('GET')
                                                                 http.setDoOutput(true)
-                                                                http.setRequestProperty('Authorization', 'JWT ${DOCKER_HUB_TOKEN}')
+                                                                http.setRequestProperty('Authorization', 'JWT '+tmpToken)
                                                                 http.connect()
                                                                 def response = [:]
                                                                 if (http.responseCode == 200) {
