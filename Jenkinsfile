@@ -56,7 +56,11 @@ pipeline {
                                             response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
                                         }
                                         def resArr = []
-                                        response .each { resArr.push(it.name) }
+                                        response .each { it-> 
+                                            if(it.name.contains("k8s")){
+                                            resArr.push(it.name) 
+                                            }
+                                        }
                                         return resArr
                                      } catch (Exception e) {
                                           return [e.toString()]
