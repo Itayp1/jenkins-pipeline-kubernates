@@ -56,9 +56,9 @@ pipeline {
                                             response = new JsonSlurper().parseText(http.errorStream.getText('UTF-8'))
                                         }
                                         def resArr = []
-                                        response .each { it-> 
+                                        response .each { it->
                                             if(it.name.contains("k8s")){
-                                            resArr.push(it.name) 
+                                            resArr.push(it.name)
                                             }
                                         }
                                         return resArr
@@ -301,6 +301,10 @@ pipeline {
                     serviceDeploymentChanged = serviceDeployment.text.replace('tmpServiceName', "${RepoName}")
                     writeFile file:"${WORKSPACE}/jenkins-pipeline-kubernates/Service.yaml", text:serviceDeploymentChanged
 
+                    horizontalPodAutoscaler = new File("${WORKSPACE}/jenkins-pipeline-kubernates/HorizontalPodAutoscaler.yaml")
+                    horizontalPodAutoscalerChanged = horizontalPodAutoscaler.text.replace('tmpServiceName', "${RepoName}")
+                    writeFile file:"${WORKSPACE}/jenkins-pipeline-kubernates/HorizontalPodAutoscaler.yaml", text:horizontalPodAutoscalerChanged
+
                     // def yaml = readYaml file: 'Deployment.yaml'
 
                     // yaml.metadata.name = RepoName
@@ -320,6 +324,7 @@ pipeline {
                     cd jenkins-pipeline-kubernates
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f qa-config-map.yaml
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Deployment.yaml
+                    kubectl --kubeconfig ${KUBECONFIG}  apply -f HorizontalPodAutoscaler.yaml
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Service.yaml
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Ingress.yaml
                     """
