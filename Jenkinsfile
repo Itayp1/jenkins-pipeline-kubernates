@@ -258,6 +258,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh """
+                ls
                  cd ${RepoName}
                  whoami
 
