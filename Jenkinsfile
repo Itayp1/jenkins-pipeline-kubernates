@@ -257,11 +257,15 @@ pipeline {
                 }
             steps {
                 echo 'Building..'
-                sh """
+                sh '''
+                cd ..
                 ls
-                 cd ${RepoName}
-                 whoami
+                cd ..
+                ls
 
+                '''
+                sh """
+                 cd ${RepoName}
                  sudo docker build -t ${RepoName}:latest .
                  sudo docker tag ${RepoName}:latest itayp/${RepoName}:${NextImageVersion}
 
