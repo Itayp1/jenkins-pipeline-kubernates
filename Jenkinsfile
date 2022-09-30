@@ -257,13 +257,6 @@ pipeline {
                 }
             steps {
                 echo 'Building..'
-                sh '''
-                cd ..
-                ls
-                cd ..
-                ls
-
-                '''
                 sh """
                  cd ${RepoName}
                  sudo docker build -t ${RepoName}:latest .
