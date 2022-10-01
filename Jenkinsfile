@@ -287,14 +287,7 @@ pipeline {
                 script {
                     echo 'Deploying....'
                     sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
-
                     def repoConfig = readYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/gen.deploy.yaml"
-                        println(RepoName)
-                        println(repoConfig)
-                        println(repoConfig.projects)
-                        println(repoConfig.projects[RepoName])
-                        println(repoConfig.projects[RepoName].scaleUp)
-
                     if (repoConfig.projects[RepoName] != null && repoConfig.projects[RepoName].scaleUp == true) {
                         println('repo config with scale up change default setting')
                         def deployment = readYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml"

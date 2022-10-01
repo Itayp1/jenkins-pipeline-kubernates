@@ -1,5 +1,5 @@
 projects:
-  shabes-holidays-reminder:
+  shabes-holidays-reminder-k8s:
     scaleUp: true
     resources:
       limits:
