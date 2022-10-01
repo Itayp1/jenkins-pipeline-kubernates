@@ -291,29 +291,12 @@ pipeline {
                     if (repoConfig.projects[RepoName] != null && repoConfig.projects[RepoName].scaleUp == true) {
                         println('repo config with scale up change default setting')
                         def deployment = readYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml"
-                        echo 'Deploying.1'
-
-                        println(deployment.spec.template.spec)
-                        println(deployment.spec.template.spec.containers[0])
-                        println(deployment.spec.template.spec.containers[0].resources)
-
-                        println(repoConfig.projects[RepoName])
-
-                        println(repoConfig.projects[RepoName].resources)
-
                         deployment.spec.template.spec.containers[0].resources = repoConfig.projects[RepoName].resources
-                        echo 'Deploying.2'
-
                         if (repoConfig.projects[RepoName].maxReplicas != null) {
-                            echo 'Deploying.3'
-
                             def horizontalPodAutoscaler = readYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/HorizontalPodAutoscaler.yaml"
-                            echo 'Deploying.4'
-
                             horizontalPodAutoscaler.spec.maxReplicas = repoConfig.projects[RepoName].maxReplicas
                             writeYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/HorizontalPodAutoscaler.yaml", data:horizontalPodAutoscaler ,overwrite:true
                         }
-
                         writeYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml", data:deployment ,overwrite:true
                     }
                     file = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml")
