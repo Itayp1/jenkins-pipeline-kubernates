@@ -1,0 +1,10 @@
+projects:
+  shabes-holidays-reminder:
+    scaleUp: true
+    resources:
+      cpu:
+        limits: "100m"
+        requests: "10m"
+      memory:
+        limits: "256Mi"
+        request: "64Mi"

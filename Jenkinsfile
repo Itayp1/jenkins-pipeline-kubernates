@@ -2,6 +2,7 @@
 /* groovylint-disable LineLength */
 /* groovylint-disable-next-line CompileStatic */
 import groovy.json.JsonSlurper
+import groovy.yaml.YamlSlurper
 
 pipeline {
     agent any
@@ -285,6 +286,15 @@ pipeline {
                     echo 'Deploying....'
                     sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
 
+                    def repoConfig = new YamlSlurper().parse("${WORKSPACE}/jenkins-pipeline-kubernates/gen.deploy.yaml" as File)
+                    if (repoConfig[RepoName] && repoConfig[RepoName].scaleUp == true) {
+                        def deployment = new YamlSlurper().parse("${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml" as File)
+                        deployment.spec.containers[0].resources.limits.cpu = repoConfig[RepoName].resources.cpu.limits
+                        deployment.spec.containers[0].resources.requests.cpu = repoConfig[RepoName].resources.cpu.requests
+                        deployment.spec.containers[0].resources.limits.memory = repoConfig[RepoName].resources.memory.limits
+                        deployment.spec.containers[0].resources.requests.memory = repoConfig[RepoName].resources.memory.requests
+                        writeYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml", data: deployment
+                    }
                     file = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml")
                     newConfig = file.text.replace('tmpServiceNameImage', "itayp/${RepoName}:${NextImageVersion}")
                     newConfig = newConfig.replace('tmpServiceName', "${RepoName}")
