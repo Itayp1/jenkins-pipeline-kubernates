@@ -30,7 +30,7 @@ spec:
               memory: 256Mi
             requests:
               cpu: "10m"
-              memory: 32Mi
+              memory: 64Mi
           env:
             - name: "SERVICE_NAME"
               value: "tmpServiceName"
