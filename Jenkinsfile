@@ -289,8 +289,9 @@ pipeline {
                     sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
 
                     def repoConfig = readYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/gen.deploy.yaml"
-                    println(repoConfig)
-
+                        println(RepoName)
+                        println(repoConfig)
+                        println(repoConfig.projects)
                         println(repoConfig.projects[RepoName])
                         println(repoConfig.projects[RepoName].scaleUp)
 
