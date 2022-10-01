@@ -4,7 +4,8 @@
 import groovy.json.JsonSlurper
 
 // import groovy.yaml.YamlSlurper
-
+//requirments
+// pipeline utility steps
 pipeline {
     agent any
     environment {
