@@ -296,7 +296,7 @@ pipeline {
                         deployment.spec.containers[0].resources.requests.cpu = repoConfig[RepoName].resources.cpu.requests
                         deployment.spec.containers[0].resources.limits.memory = repoConfig[RepoName].resources.memory.limits
                         deployment.spec.containers[0].resources.requests.memory = repoConfig[RepoName].resources.memory.requests
-                        writeYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml", data: deployment
+                        writeYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml", data: text:yamlToString(deployment)
                     }
                     file = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml")
                     newConfig = file.text.replace('tmpServiceNameImage', "itayp/${RepoName}:${NextImageVersion}")
