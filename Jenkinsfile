@@ -2,7 +2,8 @@
 /* groovylint-disable LineLength */
 /* groovylint-disable-next-line CompileStatic */
 import groovy.json.JsonSlurper
-import groovy.yaml.YamlSlurper
+
+// import groovy.yaml.YamlSlurper
 
 pipeline {
     agent any
