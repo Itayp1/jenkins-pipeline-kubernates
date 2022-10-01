@@ -293,7 +293,7 @@ pipeline {
                         def deployment = readYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml"
                         echo 'Deploying.1'
 
-                        deployment.template.spec.containers[0].resources = repoConfig.projects[RepoName].resources
+                        deployment.spec.template.containers[0].resources = repoConfig.projects[RepoName].resources
                         echo 'Deploying.2'
 
                         if (repoConfig.projects[RepoName].maxReplicas != null) {
