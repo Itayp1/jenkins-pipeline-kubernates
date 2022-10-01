@@ -287,9 +287,10 @@ pipeline {
                     echo 'Deploying....'
                     sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
 
-                    def repoConfig = new YamlSlurper().parse("${WORKSPACE}/jenkins-pipeline-kubernates/gen.deploy.yaml" as File)
+                    def repoConfig = readYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/gen.deploy.yaml"
+
                     if (repoConfig[RepoName] && repoConfig[RepoName].scaleUp == true) {
-                        def deployment = new YamlSlurper().parse("${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml" as File)
+                        def deployment = readYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml"
                         deployment.spec.containers[0].resources.limits.cpu = repoConfig[RepoName].resources.cpu.limits
                         deployment.spec.containers[0].resources.requests.cpu = repoConfig[RepoName].resources.cpu.requests
                         deployment.spec.containers[0].resources.limits.memory = repoConfig[RepoName].resources.memory.limits
