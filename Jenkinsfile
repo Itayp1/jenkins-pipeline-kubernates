@@ -291,7 +291,7 @@ pipeline {
                     if (repoConfig.projects[RepoName] != null && repoConfig.projects[RepoName].scaleUp == true) {
                         println('repo config with scale up change default setting')
                         def deployment = readYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml"
-                        deployment.spec.containers[0] = repoConfig.projects[RepoName].resources
+                        deployment.spec.containers[0].resources = repoConfig.projects[RepoName].resources
                         writeYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml", text:yamlToString(deployment)
                     }
                     file = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml")
