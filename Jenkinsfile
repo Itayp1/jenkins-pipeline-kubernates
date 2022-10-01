@@ -291,15 +291,22 @@ pipeline {
                     if (repoConfig.projects[RepoName] != null && repoConfig.projects[RepoName].scaleUp == true) {
                         println('repo config with scale up change default setting')
                         def deployment = readYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml"
+                        echo 'Deploying.1'
+
                         deployment.template.spec.containers[0].resources = repoConfig.projects[RepoName].resources
+                        echo 'Deploying.2'
+
                         if (repoConfig.projects[RepoName].maxReplicas != null) {
+                            echo 'Deploying.3'
+
                             def horizontalPodAutoscaler = readYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/HorizontalPodAutoscaler.yaml"
+                            echo 'Deploying.4'
+
                             horizontalPodAutoscaler.spec.maxReplicas = repoConfig.projects[RepoName].maxReplicas
                             writeYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/HorizontalPodAutoscaler.yaml", text:yamlToString(horizontalPodAutoscaler)
                         }
 
                         writeYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml", text:yamlToString(deployment)
-
                     }
                     file = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml")
                     newConfig = file.text.replace('tmpServiceNameImage', "itayp/${RepoName}:${NextImageVersion}")
