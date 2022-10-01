@@ -26,6 +26,9 @@ spec:
         - type: Pods
           value: 1
           periodSeconds: 15
+        - type: Percent
+          value: 10
+          periodSeconds: 15
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
