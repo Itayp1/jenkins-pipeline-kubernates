@@ -1,5 +1,5 @@
 projects:
-  shabes-holidays-reminder-k8s:
+  example:
     scaleUp: true
     maxReplicas: 2
     resources:

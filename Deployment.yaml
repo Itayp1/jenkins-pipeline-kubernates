@@ -29,7 +29,7 @@ spec:
               cpu: "100m"
               memory: 256Mi
             requests:
-              cpu: "1m"
+              cpu: "10m"
               memory: 32Mi
           env:
             - name: "SERVICE_NAME"
