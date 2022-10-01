@@ -311,10 +311,10 @@ pipeline {
                             echo 'Deploying.4'
 
                             horizontalPodAutoscaler.spec.maxReplicas = repoConfig.projects[RepoName].maxReplicas
-                            writeYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/HorizontalPodAutoscaler.yaml", text:yamlToString(horizontalPodAutoscaler)
+                            writeYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/HorizontalPodAutoscaler.yaml", data:horizontalPodAutoscaler
                         }
 
-                        writeYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml", text:yamlToString(deployment)
+                        writeYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml", data:deployment
                     }
                     file = new File("${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml")
                     newConfig = file.text.replace('tmpServiceNameImage', "itayp/${RepoName}:${NextImageVersion}")
