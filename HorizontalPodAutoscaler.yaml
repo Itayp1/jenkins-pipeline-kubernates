@@ -5,7 +5,7 @@ metadata:
   namespace: qa
 spec:
   minReplicas: 1
-  maxReplicas: 3
+  maxReplicas: 1
   metrics:
     - resource:
         name: cpu

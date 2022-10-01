@@ -1,6 +1,7 @@
 projects:
   shabes-holidays-reminder-k8s:
     scaleUp: true
+    maxReplicas: 3
     resources:
       limits:
         cpu: "100m"
