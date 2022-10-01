@@ -290,6 +290,7 @@ pipeline {
                     def repoConfig = readYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/gen.deploy.yaml"
 
                     if (repoConfig[RepoName] && repoConfig[RepoName].scaleUp == true) {
+                        println('repo config with scale up change default setting')
                         def deployment = readYaml file: "${WORKSPACE}/jenkins-pipeline-kubernates/Deployment.yaml"
                         deployment.spec.containers[0].resources.limits.cpu = repoConfig[RepoName].resources.cpu.limits
                         deployment.spec.containers[0].resources.requests.cpu = repoConfig[RepoName].resources.cpu.requests
