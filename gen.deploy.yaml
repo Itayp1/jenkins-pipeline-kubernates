@@ -14,8 +14,8 @@ projects:
     maxReplicas: 1
     resources:
       limits:
-        cpu: "250m"
-        memory: "256Mi"
+        cpu: "700m"
+        memory: "1024Mi"
       requests:
-        cpu: "20m"
+        cpu: "200m"
         memory: "64Mi"
