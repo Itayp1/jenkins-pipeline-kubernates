@@ -17,3 +17,4 @@ data:
   MINIO_PORT: "9000"
   useSSL: "false"
   SMS_API_KEY: r55L4M2yHj67q85004P7Qi249F6fC3a3
+  FFMPEG_PATH: ffmpeg
