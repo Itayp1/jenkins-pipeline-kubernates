@@ -9,3 +9,13 @@ projects:
       requests:
         cpu: "20m"
         memory: "64Mi"
+  audio-to-text:
+    scaleUp: false
+    maxReplicas: 1
+    resources:
+      limits:
+        cpu: "250m"
+        memory: "256Mi"
+      requests:
+        cpu: "20m"
+        memory: "64Mi"
