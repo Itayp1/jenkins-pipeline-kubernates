@@ -9,7 +9,7 @@ projects:
       requests:
         cpu: "20m"
         memory: "64Mi"
-  audio-to-text:
+  audio-to-text-k8s:
     scaleUp: true
     maxReplicas: 1
     resources:
