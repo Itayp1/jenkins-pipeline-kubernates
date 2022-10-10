@@ -10,7 +10,7 @@ projects:
         cpu: "20m"
         memory: "64Mi"
   audio-to-text:
-    scaleUp: false
+    scaleUp: true
     maxReplicas: 1
     resources:
       limits:
