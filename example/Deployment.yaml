@@ -4,7 +4,7 @@ metadata:
   name: "example"
   namespace: "qa"
 spec:
-  # replicas: 1
+  replicas: 1
   selector:
     matchLabels:
       app: "example-deployment"
@@ -22,11 +22,11 @@ spec:
           image: "itayp/example:1.0.18"
           resources:
             limits:
-              cpu: "100m"
+              cpu: "128m"
               memory: 128Mi
             requests:
               cpu: "50m"
-              memory: 64Mi
+              memory: 128Mi
           ports:
             - containerPort: 3000
           livenessProbe:

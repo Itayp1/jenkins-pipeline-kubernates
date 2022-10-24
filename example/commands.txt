@@ -10,20 +10,18 @@ kubectl describe service example -n qa
 kubectl describe deployment example -n qa
 
  
-
 show details abount the usage and scaling of the deployment pods 
 kubectl get hpa example --watch
-kubectl top pods  --watch
+kubectl top pods  
+kubectl top pods {podname}
+watch -n 1 kubectl top pods example-785d578f6d-vzwvw
 
 change default namespace 
 kubectl config set-context {cluster-name} --namespace qa
 
 connect into a pod 
-kubectl exec -it  --tty  {podname} bash
+kubectl exec -it  {podname} bash
 
-invoke service from crl <pod 2 pod example>
+invoke service from curl <pod 2 pod example>
 curl --location --request GET 'http://example-service/health'
 
- export KUBECONFIG=/mnt/c/CERTS/kubeconfig.yaml
-  watch -n 1 kubectl top pods example-785d578f6d-vzwvw
-  vi ~/.bashrc
