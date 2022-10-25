@@ -7,11 +7,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: "example2-deployment"
+      app: "example2"
   template:
     metadata:
       labels:
-        app: "example2-deployment"
+        app: "example2"
     spec:
       volumes:
         - name: example-volume

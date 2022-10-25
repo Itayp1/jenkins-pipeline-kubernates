@@ -19,10 +19,10 @@ change default namespace
 kubectl config set-context {cluster-name} --namespace qa
 
 connect into a pod 
-kubectl exec -it  --tty  {podname} bash
+kubectl exec -it  example-785d578f6d-997fl   bash
 
 invoke service from crl <pod 2 pod example>
-curl --location --request GET 'http://example-service/health'
+curl --location --request GET 'http://example2/health'
 
  export KUBECONFIG=/mnt/c/CERTS/kubeconfig.yaml
   watch -n 1 kubectl top pods example-785d578f6d-vzwvw
