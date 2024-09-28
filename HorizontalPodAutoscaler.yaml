@@ -2,7 +2,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: "tmpServiceName"
-  namespace: qa
+  namespace: prod
 spec:
   minReplicas: 1
   maxReplicas: 1

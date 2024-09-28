@@ -79,7 +79,7 @@ pipeline {
                             ),
                             choice(
                                 name: 'ENV',
-                                choices: ['qa', 'prd']
+                                choices: ['prod', 'qa']
                             ),
                          [$class: 'DynamicReferenceParameter',
                                 choiceType: 'ET_FORMATTED_HIDDEN_HTML',

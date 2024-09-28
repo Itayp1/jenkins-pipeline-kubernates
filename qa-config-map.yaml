@@ -2,11 +2,11 @@ kind: ConfigMap
 apiVersion: v1
 metadata:
   name: config-map
-  namespace: "qa"
+  namespace: "prod"
 
 data:
   # Configuration values can be set as key-value properties
-  ENV: "qa"
+  ENV: "prod"
   ELASTIC_ADDRESS: "http://185.253.73.11:9200"
   ELASTIC_USERNAME: "admin"
   ELASTIC_PASSWORD: "5197436551974365Aa"
