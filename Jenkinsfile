@@ -333,6 +333,7 @@ pipeline {
                     // writeFile file:"${RepoName}/Ingress.yaml", text:yamlToString(yaml2)
                     bat '''
                     sh plink -ssh -pw Alroe519 itayp@10.100.102.79
+                    ifconfig
                     echo 1234
 
                     '''
