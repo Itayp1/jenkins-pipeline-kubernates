@@ -46,11 +46,14 @@ app.post("/deployFiles", async (req, res) => {
     }
 
     // Execute a command synchronously
-    const commandOutput1 = await execSync("kubectl  apply -f qa-config-map.yaml", { encoding: "utf-8" });
-    const commandOutput2 = await execSync("kubectl  apply -f Deployment.yaml", { encoding: "utf-8" });
-    const commandOutput3 = await execSync("kubectl  apply -f HorizontalPodAutoscaler.yaml", { encoding: "utf-8" });
-    const commandOutput4 = await execSync("kubectl  apply -f Service.yaml", { encoding: "utf-8" });
-    const commandOutput5 = await execSync("kubectl  apply -f Ingress.yaml", { encoding: "utf-8" });
+    const commandOutputdir = await execSync("dir", { encoding: "utf-8" });
+    console.error(`Command output: ${commandOutputdir}`);
+
+    const commandOutput1 = await execSync("kubectl  apply -f ./qa-config-map.yaml", { encoding: "utf-8" });
+    const commandOutput2 = await execSync("kubectl  apply -f ./Deployment.yaml", { encoding: "utf-8" });
+    const commandOutput3 = await execSync("kubectl  apply -f ./HorizontalPodAutoscaler.yaml", { encoding: "utf-8" });
+    const commandOutput4 = await execSync("kubectl  apply -f ./Service.yaml", { encoding: "utf-8" });
+    const commandOutput5 = await execSync("kubectl  apply -f ./Ingress.yaml", { encoding: "utf-8" });
     console.log(`Command output: ${commandOutput1}`);
     console.log(`Command output: ${commandOutput2}`);
     console.log(`Command output: ${commandOutput3}`);
