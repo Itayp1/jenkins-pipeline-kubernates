@@ -247,7 +247,7 @@ pipeline {
             }
             steps {
                 echo 'Cloning The Repo..'
-                sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/${RepoName}.git"
+                bat "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/${RepoName}.git"
 
                 echo "params:${params}"
                 echo "env:${env}"
@@ -260,10 +260,10 @@ pipeline {
                 }
             steps {
                 echo 'Building..'
-                sh """
+                bat """
                  cd ${RepoName}
-                 sudo docker build -t ${RepoName}:latest .
-                 sudo docker tag ${RepoName}:latest itayp/${RepoName}:${NextImageVersion}
+                 docker build -t ${RepoName}:latest .
+                 docker tag ${RepoName}:latest itayp/${RepoName}:${NextImageVersion}
 
                 """
             }
@@ -274,11 +274,11 @@ pipeline {
                 }
             steps {
                 echo 'Upload Image To Artifactory..'
-                sh """
+                bat """
                  cd ${RepoName}
-                 sudo docker logout
-                 sudo docker login -u itayp -p Alroe2018
-                 sudo docker push itayp/${RepoName}:${NextImageVersion}
+                 docker logout
+                 docker login -u itayp -p Alroe2018
+                 docker push itayp/${RepoName}:${NextImageVersion}
                 """
             }
         }
@@ -332,7 +332,7 @@ pipeline {
                     // yaml2.spec.rules[0].paths[0].backend.service.name = RepoName
                     // writeFile file:"${RepoName}/Ingress.yaml", text:yamlToString(yaml2)
 
-                    sh """
+                    bat """
                     cd jenkins-pipeline-kubernates
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f qa-config-map.yaml
                     kubectl --kubeconfig ${KUBECONFIG}  apply -f Deployment.yaml
