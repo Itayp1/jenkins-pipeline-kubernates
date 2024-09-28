@@ -15,7 +15,7 @@ for (let index = 0; index < list.length; index++) {
 
 const start = async () => {
   try {
-    await axios.post("http://localhost:3000/deployFiles", files).then().catch();
+    await axios.post("http://10.100.102.30:3000/deployFiles", files).then().catch();
   } catch (error) {
     console.log(error.message);
     throw error;
