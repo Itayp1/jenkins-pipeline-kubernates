@@ -1,0 +1,20 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: config-map
+  namespace: "prod"
+
+data:
+  # Configuration values can be set as key-value properties
+  ENV: "prod"
+  ELASTIC_ADDRESS: "http://185.253.73.11:9200"
+  ELASTIC_USERNAME: "admin"
+  ELASTIC_PASSWORD: "5197436551974365Aa"
+  PORT: "3000"
+  MINIO_ENDPOINT: "minio.minio.svc.cluster.local"
+  MINIO_ACCESSKEY: "popopo1234"
+  MINIO_SECRETKEY: "popopo1234"
+  MINIO_PORT: "9000"
+  useSSL: "false"
+  SMS_API_KEY: r55L4M2yHj67q85004P7Qi249F6fC3a3
+  FFMPEG_PATH: ffmpeg

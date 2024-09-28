@@ -1,0 +1,21 @@
+projects:
+  example:
+    scaleUp: true
+    maxReplicas: 2
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "256Mi"
+      requests:
+        cpu: "20m"
+        memory: "64Mi"
+  # audio-to-text-k8s:
+  #   scaleUp: true
+  #   maxReplicas: 1
+  #   resources:
+  #     limits:
+  #       cpu: "700m"
+  #       memory: "1024Mi"
+  #     requests:
+  #       cpu: "200m"
+  #       memory: "64Mi"
