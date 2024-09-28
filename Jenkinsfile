@@ -333,6 +333,8 @@ pipeline {
                     // writeFile file:"${RepoName}/Ingress.yaml", text:yamlToString(yaml2)
                     bat """
                     cd ${WORKSPACE}\\jenkins-pipeline-kubernates\\api
+                    npm init --y
+                    npm i axios
                     node index.js
                     """
 
