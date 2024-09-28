@@ -332,9 +332,10 @@ pipeline {
                     // yaml2.spec.rules[0].paths[0].backend.service.name = RepoName
                     // writeFile file:"${RepoName}/Ingress.yaml", text:yamlToString(yaml2)
                     bat '''
-                    cp *.yaml C:\\projects\\jenkins-pipeline-kubernates\\api
+                    copy /Y *.yaml C:\\projects\\jenkins-pipeline-kubernates\\api
                     cd C:\\projects\\jenkins-pipeline-kubernates\\api
                     node index.js
+                    del *.yaml
                     '''
 
                 // bat """
