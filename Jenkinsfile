@@ -332,7 +332,8 @@ pipeline {
                     // yaml2.spec.rules[0].paths[0].backend.service.name = RepoName
                     // writeFile file:"${RepoName}/Ingress.yaml", text:yamlToString(yaml2)
                     bat '''
-                    sh plink -ssh -pw Alroe519 itayp@10.100.102.79
+                    sh
+                    plink -ssh -pw Alroe519 itayp@10.100.102.79
                     ifconfig
                     echo 1234
 
