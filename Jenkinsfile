@@ -331,15 +331,19 @@ pipeline {
                     // yaml2.spec.rules[0].host = RepoName - qa.itayp - dev.com
                     // yaml2.spec.rules[0].paths[0].backend.service.name = RepoName
                     // writeFile file:"${RepoName}/Ingress.yaml", text:yamlToString(yaml2)
+                    bat '''
+                    sh plink -ssh -pw Alroe519 itayp@10.100.102.79
+                    echo 1234
 
-                    bat """
-                    cd jenkins-pipeline-kubernates
-                    kubectl --kubeconfig ${KUBECONFIG}  apply -f qa-config-map.yaml
-                    kubectl --kubeconfig ${KUBECONFIG}  apply -f Deployment.yaml
-                    kubectl --kubeconfig ${KUBECONFIG}  apply -f HorizontalPodAutoscaler.yaml
-                    kubectl --kubeconfig ${KUBECONFIG}  apply -f Service.yaml
-                    kubectl --kubeconfig ${KUBECONFIG}  apply -f Ingress.yaml
-                    """
+                    '''
+                // bat """
+                // cd jenkins-pipeline-kubernates
+                // kubectl --kubeconfig ${KUBECONFIG}  apply -f qa-config-map.yaml
+                // kubectl --kubeconfig ${KUBECONFIG}  apply -f Deployment.yaml
+                // kubectl --kubeconfig ${KUBECONFIG}  apply -f HorizontalPodAutoscaler.yaml
+                // kubectl --kubeconfig ${KUBECONFIG}  apply -f Service.yaml
+                // kubectl --kubeconfig ${KUBECONFIG}  apply -f Ingress.yaml
+                // """
                 }
             }
         }
