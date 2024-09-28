@@ -284,6 +284,10 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                sshagent(credentials: ['minikubessh']) {
+                    sh 'ssh -o StrictHostKeyChecking=no itayp@y10.100.102.79 "ifconfig"'
+                }
+
                 script {
                     echo 'Deploying....'
                     sh "git clone https://itayp1:${GIT_REPO_TOKEN}@github.com/Itayp1/jenkins-pipeline-kubernates.git"
@@ -338,6 +342,7 @@ pipeline {
                     echo 1234
 
                     '''
+
                 // bat """
                 // cd jenkins-pipeline-kubernates
                 // kubectl --kubeconfig ${KUBECONFIG}  apply -f qa-config-map.yaml
