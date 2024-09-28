@@ -332,6 +332,7 @@ pipeline {
                     // yaml2.spec.rules[0].paths[0].backend.service.name = RepoName
                     // writeFile file:"${RepoName}/Ingress.yaml", text:yamlToString(yaml2)
                     bat '''
+                    dir
                     node index.js
                     '''
 
